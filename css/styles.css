@@ -144,6 +144,7 @@ html.js:not(.is-loading) .loader img {
     rgba(0, 0, 0, .18) 38%,
     rgba(0, 0, 0, .72) 100%
   );
+  pointer-events: none;
 }
 .hero-inner {
   position: relative;
@@ -625,8 +626,6 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
     order: -1;
   }
   .prop-nav { justify-self: stretch; width: 100%; }
-  .hero { min-height: 88svh; }
-  .hero-inner { padding: 3.2rem 1rem 6.2rem; }
   .hero-actions { flex-direction: column; }
   .hero-actions .btn { width: 100%; }
   .mobile-cta { display: grid; grid-template-columns: 1fr 1fr; }
@@ -636,6 +635,66 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   .brand-name span { letter-spacing: .14em; }
   .listing-links .btn { width: 100%; }
 }
+
+/* Landscape storefront: show the full facade on phones/tablets in portrait instead of cover-cropping it. */
+@media (max-width: 767px), (max-width: 1024px) and (orientation: portrait) {
+  .hero {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-items: stretch;
+  }
+  .hero-media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    flex: 0 0 auto;
+    overflow: hidden;
+  }
+  .hero-media img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+  .hero-ken { animation: none; transform: none; }
+  .hero-overlay {
+    background: linear-gradient(180deg, transparent 62%, rgba(0, 0, 0, .28) 100%);
+  }
+  .hero-inner {
+    width: 100%;
+    background: #111;
+    padding: 1.75rem 1.15rem 5.6rem;
+  }
+  .hero h1,
+  .hero-sub { text-shadow: none; }
+
+  .services-band {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 4rem;
+    background: #111;
+  }
+  .services-band .band-bg {
+    position: relative;
+    inset: auto;
+    flex: 0 0 auto;
+    filter: none;
+  }
+  .services-band .band-bg img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+  .services-band .band-bg::after {
+    background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, .45) 100%);
+  }
+  .band-grid { padding: 2.2rem 6vw 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .anim, .hero-ken { animation: none; opacity: 1; transform: none; }
   html.js .reveal { opacity: 1; transform: none; transition: none; }
