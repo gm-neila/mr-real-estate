@@ -90,7 +90,7 @@
         <a class="link-line" href="#contacto">Hablar con el asesor <span>→</span></a>
       </div>
       <div class="about-photo reveal">
-        <img src="assets/asesor.jpg" width="900" height="1200" decoding="async" alt="Asesor de MR. Real Estate atendiendo en la oficina de Salamanca.">
+        <img src="assets/asesor-retrato.jpg" width="2536" height="3120" decoding="async" alt="Asesor de MR. Real Estate atendiendo en la oficina de Salamanca.">
       </div>
     </section>
 
@@ -130,13 +130,18 @@
     </section>
 
     <section class="listings" id="inmuebles">
-      <p class="pill pill-ink reveal">Cartera en portales</p>
-      <h2 class="reveal">¿Buscas piso en Salamanca?</h2>
-      <p class="reveal listings-lead">Nuestros anuncios están en la tienda profesional de Milanuncios. Si quieres explorar el mercado de Salamanca en general —esas búsquedas no son anuncios nuestros—, también puedes abrir los portales de la ciudad o pedirnos un encargo privado.</p>
+      <p class="pill pill-ink reveal">Nuestras propiedades</p>
+      <h2 class="reveal">Descubre la cartera en Salamanca</h2>
+      <p class="reveal listings-lead">Anuncios reales de nuestra tienda en Milanuncios. Una muestra de alquiler y venta; el listado vivo está en el portal.</p>
+      <div class="listing-filters reveal" role="tablist" aria-label="Filtrar anuncios">
+        <button type="button" class="is-on" data-filter="all">Todas</button>
+        <button type="button" data-filter="Alquiler">Alquiler</button>
+        <button type="button" data-filter="Venta">Venta</button>
+      </div>
+      <div class="prop-grid" id="prop-grid"></div>
+      <p class="listings-empty" id="listings-empty" hidden>No hay anuncios en este filtro. Mira la tienda completa en Milanuncios.</p>
       <div class="listing-links reveal">
-        <a class="btn btn-solid" href="https://www.milanuncios.com/tiendas-profesionales/mr-real-estate-554544" target="_blank" rel="noreferrer">Ver anuncios en Milanuncios</a>
-        <a class="btn btn-ghost" href="https://www.idealista.com/venta-viviendas/salamanca-salamanca/" target="_blank" rel="noreferrer">Idealista · mercado Salamanca</a>
-        <a class="btn btn-ghost" href="https://www.fotocasa.es/es/comprar/viviendas/salamanca-capital/todas-las-zonas/l" target="_blank" rel="noreferrer">Fotocasa · mercado Salamanca</a>
+        <a class="btn btn-solid" href="https://www.milanuncios.com/tiendas-profesionales/mr-real-estate-554544" target="_blank" rel="noreferrer">Ver todos los anuncios</a>
         <a class="btn btn-ghost" href="#contacto" data-intent="Quiero comprar">Encargo privado</a>
       </div>
     </section>
@@ -202,7 +207,7 @@
 
     <section class="contact-band" id="contacto">
       <div class="band-bg">
-        <img src="assets/asesor.jpg" alt="" aria-hidden="true" decoding="async">
+        <img src="assets/asesor-contacto.jpg" width="3549" height="1941" alt="" aria-hidden="true" decoding="async">
       </div>
       <div class="contact-wrap">
         <form id="captacion" class="frost-form reveal" novalidate>
@@ -390,6 +395,7 @@
   }
   </script>
 
+  <script src="js/listings-data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

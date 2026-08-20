@@ -114,3 +114,49 @@ if (video && !reduceMotion) {
   videoIo.observe(video);
   video.addEventListener("error", () => video.closest(".band-reel")?.remove());
 }
+
+const listingsPayload = window.MR_LISTINGS || { listings: [] };
+const propGrid = document.getElementById("prop-grid");
+const listingsEmpty = document.getElementById("listings-empty");
+const MAX_CARDS = 9;
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderListings(filter) {
+  if (!propGrid) return;
+  const all = listingsPayload.listings || [];
+  const filtered = filter === "all" ? all : all.filter((item) => item.operation === filter);
+  const shown = filtered.slice(0, MAX_CARDS);
+  listingsEmpty.hidden = shown.length > 0;
+  propGrid.innerHTML = shown.map((item) => {
+    const meta = [item.area, item.rooms, item.baths].filter(Boolean)
+      .map((bit) => `<li>${escapeHtml(bit)}</li>`).join("");
+    const reserved = item.reserved ? `<span class="sold">Reservado</span>` : `<span>Disponible</span>`;
+    return `<a class="prop-card reveal is-in" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">
+      <div class="prop-photo">
+        <img src="${escapeHtml(item.image)}" alt="" loading="lazy" referrerpolicy="no-referrer">
+        <div class="prop-badges">${reserved}<span>${escapeHtml(item.operation)}</span></div>
+      </div>
+      <div class="prop-body">
+        <p class="prop-price">${escapeHtml(item.price)}</p>
+        <h3>${escapeHtml(item.title)}</h3>
+        <ul class="prop-meta">${meta}</ul>
+      </div>
+    </a>`;
+  }).join("");
+}
+
+renderListings("all");
+document.querySelectorAll(".listing-filters button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".listing-filters button").forEach((other) => other.classList.remove("is-on"));
+    btn.classList.add("is-on");
+    renderListings(btn.dataset.filter);
+  });
+});
+
