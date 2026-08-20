@@ -4,7 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MR. Real Estate | Agencia inmobiliaria en Salamanca</title>
-  <meta name="description" content="MR. Real Estate, agencia inmobiliaria en Av. Campoamor, 37003 Salamanca. Venta, compra, alquiler, hipoteca y notaría con transparencia desde el primer día.">
+  <meta name="description" content="MR. Real Estate, agencia inmobiliaria en Av. Campoamor, 18, 37003 Salamanca. Venta, compra, alquiler, hipoteca y notaría con transparencia desde el primer día.">
+  <link rel="canonical" href="https://gm-neila.github.io/mr-real-estate/">
+  <meta name="theme-color" content="#1c1c1c">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="MR. Real Estate">
+  <meta property="og:title" content="MR. Real Estate | Agencia inmobiliaria en Salamanca">
+  <meta property="og:description" content="Venta, compra, alquiler, hipoteca y notaría en Av. Campoamor, 18, Salamanca. Transparencia desde el primer día.">
+  <meta property="og:url" content="https://gm-neila.github.io/mr-real-estate/">
+  <meta property="og:image" content="https://gm-neila.github.io/mr-real-estate/assets/fachada.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MR. Real Estate | Agencia inmobiliaria en Salamanca">
+  <meta name="twitter:description" content="Tu inmobiliaria en Salamanca. Asesoramiento exclusivo e inversiones a medida.">
+  <meta name="twitter:image" content="https://gm-neila.github.io/mr-real-estate/assets/fachada.jpg">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,39 +29,40 @@
 
   <div id="loader" class="loader" aria-hidden="true">
     <div class="loader-panel"></div>
-    <img src="assets/logo.svg" alt="">
+    <img src="assets/logo.svg" alt="MR. Real Estate">
   </div>
 
   <div class="topbar">
     <a class="tel-direct" href="tel:+34653108039">Llámanos · 653 108 039</a>
     <a class="wa-direct" href="https://wa.me/34653108039">WhatsApp</a>
-    <span>Av. Campoamor, Salamanca</span>
+    <span>Av. Campoamor, 18, Salamanca</span>
   </div>
 
   <header class="site-header frost">
     <a class="brand" href="#inicio">
-      <img src="assets/logo.svg" alt="MR. Real Estate">
+      <img src="assets/logo.svg" alt="">
       <span class="brand-name">
         <strong>MR.</strong>
         <span>Real Estate</span>
       </span>
     </a>
-    <nav class="nav" aria-label="Principal">
+    <nav class="nav" id="menu-principal" aria-label="Principal">
       <a href="#nosotros">Nosotros</a>
       <a href="#servicios">Servicios</a>
+      <a href="#inmuebles">Inmuebles</a>
       <a href="#metodo">Método</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="header-actions">
-      <a class="btn btn-solid" href="#contacto">Contáctanos</a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Abrir menú"><span></span></button>
+      <a class="btn btn-solid header-cta" href="#contacto">Contáctanos</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú"><span></span></button>
     </div>
   </header>
 
   <main id="contenido">
     <section class="hero" id="inicio">
       <div class="hero-media">
-        <img class="hero-ken" src="assets/fachada.jpg" alt="Fachada de MR. Real Estate en Avenida Campoamor, Salamanca, con el logo dorado sobre mármol.">
+        <img class="hero-ken" src="assets/fachada.jpg" width="1600" height="1397" fetchpriority="high" decoding="async" alt="Fachada de MR. Real Estate en Avenida Campoamor, 18, Salamanca, con el logo dorado sobre mármol.">
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-inner">
@@ -71,17 +85,19 @@
       <div class="about-copy reveal">
         <p class="pill pill-ink">Sobre nosotros</p>
         <h2>Vamos a conocernos un poco mejor</h2>
-        <p class="lead">Conoce a MR. Real Estate: tu agencia a pie de calle en Av. Campoamor. No somos cualquier agencia: creamos valor y patrimonio con visión.</p>
+        <p class="lead">Conoce a MR. Real Estate: tu agencia a pie de calle en Av. Campoamor, 18. No somos cualquier agencia: creamos valor y patrimonio con visión.</p>
         <p>Estamos comprometidos con la excelencia y la satisfacción del cliente. Un único asesor te acompaña desde la primera visita hasta la firma, con honorarios claros y un servicio íntegro, presencial y digital.</p>
         <a class="link-line" href="#contacto">Hablar con el asesor <span>→</span></a>
       </div>
       <div class="about-photo reveal">
-        <img src="assets/asesor.jpg" alt="Asesor de MR. Real Estate atendiendo en la oficina de Salamanca.">
+        <img src="assets/asesor.jpg" width="900" height="1200" decoding="async" alt="Asesor de MR. Real Estate atendiendo en la oficina de Salamanca.">
       </div>
     </section>
 
     <section class="services-band" id="servicios">
-      <div class="band-bg" style="background-image:url('assets/oficina-interior.jpg')"></div>
+      <div class="band-bg">
+        <img src="assets/fachada.jpg" alt="" aria-hidden="true" decoding="async">
+      </div>
       <div class="band-grid">
         <div class="band-inner">
           <p class="pill reveal">Nuestros servicios</p>
@@ -107,11 +123,21 @@
           </div>
         </div>
         <figure class="band-reel reveal">
-          <video class="band-video" autoplay muted loop playsinline poster="assets/oficina-interior.jpg">
-            <source src="assets/oficina.mp4" type="video/mp4">
-          </video>
-          <figcaption>Nuestra oficina en Av. Campoamor, Salamanca</figcaption>
+          <video class="band-video" muted loop playsinline preload="none" poster="assets/oficina-interior.jpg" data-src="assets/oficina.mp4" aria-label="Vídeo de la oficina de MR. Real Estate en Av. Campoamor, 18"></video>
+          <figcaption>Nuestra oficina en Av. Campoamor, 18, Salamanca</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <section class="listings" id="inmuebles">
+      <p class="pill pill-ink reveal">Cartera en portales</p>
+      <h2 class="reveal">¿Buscas piso en Salamanca?</h2>
+      <p class="reveal listings-lead">Nuestros anuncios están en la tienda profesional de Milanuncios. Si quieres explorar el mercado de Salamanca en general —esas búsquedas no son anuncios nuestros—, también puedes abrir los portales de la ciudad o pedirnos un encargo privado.</p>
+      <div class="listing-links reveal">
+        <a class="btn btn-solid" href="https://www.milanuncios.com/tiendas-profesionales/mr-real-estate-554544" target="_blank" rel="noreferrer">Ver anuncios en Milanuncios</a>
+        <a class="btn btn-ghost" href="https://www.idealista.com/venta-viviendas/salamanca-salamanca/" target="_blank" rel="noreferrer">Idealista · mercado Salamanca</a>
+        <a class="btn btn-ghost" href="https://www.fotocasa.es/es/comprar/viviendas/salamanca-capital/todas-las-zonas/l" target="_blank" rel="noreferrer">Fotocasa · mercado Salamanca</a>
+        <a class="btn btn-ghost" href="#contacto" data-intent="Quiero comprar">Encargo privado</a>
       </div>
     </section>
 
@@ -141,7 +167,7 @@
         </article>
         <article class="num-card reveal">
           <h3>Oficina en Salamanca</h3>
-          <p>Av. Campoamor, 37003. Entras, te sientas y ves el expediente.</p>
+          <p>Av. Campoamor, 18, 37003. Entras, te sientas y ves el expediente.</p>
           <span class="giant">4</span>
         </article>
       </div>
@@ -153,43 +179,64 @@
       <div class="quote-grid">
         <blockquote class="reveal">
           <p>“La gestión fue impecable. Vendieron la propiedad en el plazo acordado y se ocuparon de toda la burocracia legal.”</p>
-          <footer>Vendedor particular</footer>
+          <footer>
+            <span class="quote-avatar" aria-hidden="true">V</span>
+            <span>
+              <strong>Vendedor particular</strong>
+              <small>Salamanca · venta</small>
+            </span>
+          </footer>
         </blockquote>
         <blockquote class="reveal">
           <p>“Nos guiaron paso a paso con la hipoteca y el contrato de arras. Transmiten mucha tranquilidad en cada fase.”</p>
-          <footer>Familia compradora</footer>
+          <footer>
+            <span class="quote-avatar" aria-hidden="true">F</span>
+            <span>
+              <strong>Familia compradora</strong>
+              <small>Salamanca · compra + hipoteca</small>
+            </span>
+          </footer>
         </blockquote>
       </div>
     </section>
 
     <section class="contact-band" id="contacto">
-      <div class="band-bg" style="background-image:url('assets/asesor.jpg')"></div>
+      <div class="band-bg">
+        <img src="assets/asesor.jpg" alt="" aria-hidden="true" decoding="async">
+      </div>
       <div class="contact-wrap">
         <form id="captacion" class="frost-form reveal" novalidate>
           <label>Nombre <input type="text" name="nombre" autocomplete="name" required placeholder="Nombre completo"></label>
-          <label>Email <input type="email" name="email" autocomplete="email" required placeholder="Correo electrónico"></label>
           <label>Teléfono <input type="tel" name="telefono" autocomplete="tel" required placeholder="653 000 000"></label>
           <fieldset>
             <legend>¿En qué estás interesado?</legend>
-            <div class="intent">
+            <div class="intent" role="radiogroup" aria-label="Intención">
               <label><input type="radio" name="intencion" value="Quiero vender" required checked> Vender</label>
               <label><input type="radio" name="intencion" value="Quiero comprar"> Comprar</label>
               <label><input type="radio" name="intencion" value="Quiero alquilar"> Alquilar</label>
             </div>
           </fieldset>
-          <label>Mensaje <textarea name="mensaje" placeholder="Zona, metros, plazo…"></textarea></label>
+          <details class="form-more" open>
+            <summary>Email y mensaje (opcional)</summary>
+            <label>Email <input type="email" name="email" autocomplete="email" placeholder="Correo electrónico"></label>
+            <label>Mensaje <textarea name="mensaje" placeholder="Zona, metros, plazo…"></textarea></label>
+          </details>
+          <label class="consent">
+            <input type="checkbox" name="privacidad" required>
+            <span>He leído y acepto la <button type="button" class="linkish" data-open="privacidad">política de privacidad</button>.</span>
+          </label>
           <button class="btn btn-solid" type="submit">Solicitar información</button>
-          <p class="form-note">Al enviar abres WhatsApp con tu consulta. No cedemos tus datos.</p>
+          <p class="form-note">Al enviar se abre WhatsApp con tu consulta. No usamos tus datos para publicidad de terceros.</p>
           <p class="status" id="form-status" role="status"></p>
         </form>
         <div class="contact-copy reveal">
           <h2>Contáctanos para ver cómo te podemos ayudar</h2>
-          <p>WhatsApp, llamada u oficina en Av. Campoamor. Respuesta en horario comercial.</p>
+          <p>WhatsApp, llamada u oficina en Av. Campoamor, 18. Respuesta en horario comercial.</p>
           <ul class="contact-list">
             <li><a class="wa-direct" href="https://wa.me/34653108039">Envíanos un WhatsApp</a></li>
             <li><a class="tel-direct" href="tel:+34653108039">Llámanos al 653 108 039</a></li>
             <li><a href="https://www.instagram.com/mr.realestate__" target="_blank" rel="noreferrer">Instagram @mr.realestate__</a></li>
-            <li><a href="https://maps.google.com/?q=Av.+Campoamor,+37003+Salamanca" target="_blank" rel="noreferrer">Cómo llegar · Av. Campoamor, 37003</a></li>
+            <li><a href="https://maps.google.com/?q=Av.+Campoamor+18,+37003+Salamanca" target="_blank" rel="noreferrer">Cómo llegar · Av. Campoamor, 18, 37003</a></li>
           </ul>
         </div>
       </div>
@@ -213,7 +260,7 @@
         </details>
         <details>
           <summary>¿Dónde está la oficina?</summary>
-          <p>Av. Campoamor, 37003 Salamanca, junto a La Alamedilla y el Paseo del Comercio. Atención con cita previa.</p>
+          <p>Av. Campoamor, 18, 37003 Salamanca, junto a La Alamedilla y el Paseo del Comercio. Atención con cita previa.</p>
         </details>
         <details>
           <summary>¿En qué zonas operáis?</summary>
@@ -227,7 +274,7 @@
     <div>
       <h2>MR. Real Estate</h2>
       <p>Agencia inmobiliaria en Salamanca. Venta, compra, alquiler, hipoteca y notaría.</p>
-      <p>Av. Campoamor, 37003 Salamanca</p>
+      <p>Av. Campoamor, 18, 37003 Salamanca</p>
     </div>
     <div>
       <a class="tel-direct" href="tel:+34653108039">653 108 039</a><br>
@@ -249,18 +296,99 @@
   <dialog id="aviso" class="dialog">
     <div class="dialog-inner">
       <h2>Aviso legal</h2>
-      <p>Sitio informativo de MR. Real Estate, oficina en Av. Campoamor, 37003 Salamanca. Contacto: 653 108 039.</p>
-      <p>Pendiente de razón social y NIF cuando se faciliten.</p>
-      <button class="btn btn-solid" type="button" onclick="document.getElementById('aviso').close()">Cerrar</button>
+      <p>Este sitio informa sobre los servicios de <strong>MR. Real Estate</strong>, agencia inmobiliaria con oficina en Av. Campoamor, 18, 37003 Salamanca (España). Teléfono: <a href="tel:+34653108039">653 108 039</a>.</p>
+      <p>Datos identificativos pendientes de completar por el titular (LSSI-CE): razón social, NIF/CIF y correo de contacto corporativo.</p>
+      <p>El sitio se publica con carácter informativo. El envío del formulario no constituye contrato de encargo de venta ni de mediación.</p>
+      <button class="btn btn-solid" type="button" data-close="aviso">Cerrar</button>
     </div>
   </dialog>
   <dialog id="privacidad" class="dialog">
     <div class="dialog-inner">
-      <h2>Privacidad</h2>
-      <p>Nombre, teléfono, email e intención se usan solo para atender tu consulta por WhatsApp o llamada.</p>
-      <button class="btn btn-solid" type="button" onclick="document.getElementById('privacidad').close()">Cerrar</button>
+      <h2>Política de privacidad</h2>
+      <p><strong>Responsable:</strong> MR. Real Estate, Av. Campoamor, 18, 37003 Salamanca. Tel. 653 108 039. Razón social y NIF: pendientes de facilitar por el titular.</p>
+      <p><strong>Datos que recabamos:</strong> nombre, teléfono y, si los indicas, email, intención (vender/comprar/alquilar) y mensaje.</p>
+      <p><strong>Finalidad:</strong> atender tu consulta y contactarte por WhatsApp o llamada. No elaboramos perfiles ni hacemos marketing automatizado con estos datos.</p>
+      <p><strong>Base jurídica:</strong> tu consentimiento (casilla del formulario). Puedes retirarlo dejando de responder o pidiéndolo por teléfono.</p>
+      <p><strong>Destinatarios:</strong> no vendemos tus datos. Al pulsar enviar se abre WhatsApp (servicio de Meta) con el texto de tu consulta; esa comunicación queda sujeta a las condiciones de WhatsApp.</p>
+      <p><strong>Conservación:</strong> el tiempo necesario para resolver la consulta, como máximo 12 meses si no hay relación posterior.</p>
+      <p><strong>Derechos:</strong> acceso, rectificación, supresión, limitación, portabilidad y oposición. Puedes ejercerlos en el 653 108 039 y reclamar ante la AEPD (aepd.es).</p>
+      <button class="btn btn-solid" type="button" data-close="privacidad">Cerrar</button>
     </div>
   </dialog>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["RealEstateAgent", "LocalBusiness"],
+        "@id": "https://gm-neila.github.io/mr-real-estate/#negocio",
+        "name": "MR. Real Estate",
+        "url": "https://gm-neila.github.io/mr-real-estate/",
+        "image": "https://gm-neila.github.io/mr-real-estate/assets/fachada.jpg",
+        "telephone": "+34653108039",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Avenida Campoamor, 18",
+          "postalCode": "37003",
+          "addressLocality": "Salamanca",
+          "addressRegion": "Castilla y León",
+          "addressCountry": "ES"
+        },
+        "areaServed": "Salamanca",
+        "sameAs": [
+          "https://www.instagram.com/mr.realestate__",
+          "https://www.milanuncios.com/tiendas-profesionales/mr-real-estate-554544"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Cómo me ayudáis a vender?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Valoración realista, reportaje, portales, filtro de compradores, arras, hipoteca del comprador y firma en notaría. Un solo interlocutor."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Los honorarios se ven desde el primer día?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Comisión y condiciones de encargo por escrito antes de publicar. Si no encaja, se dice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Trabajáis hipoteca?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Negociamos con entidades para condiciones preferentes y te explicamos cada cláusula antes de comprometerte."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Dónde está la oficina?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Av. Campoamor, 18, 37003 Salamanca, junto a La Alamedilla y el Paseo del Comercio. Atención con cita previa."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿En qué zonas operáis?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Salamanca capital y alrededores: Alamedilla, Delicias, Prosperidad, El Rollo, Puente Ladrillo, Garrido, centro e Universidad."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <script src="js/main.js"></script>
 </body>
