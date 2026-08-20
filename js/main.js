@@ -116,9 +116,9 @@ if (video && !reduceMotion) {
 }
 
 const listingsPayload = window.MR_LISTINGS || { listings: [] };
-const propGrid = document.getElementById("prop-grid");
+const propTrack = document.getElementById("prop-track");
+const propViewport = document.getElementById("prop-viewport");
 const listingsEmpty = document.getElementById("listings-empty");
-const MAX_CARDS = 9;
 
 function escapeHtml(value) {
   return String(value || "")
@@ -127,36 +127,94 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;");
 }
 
+function cardWidth() {
+  const card = propTrack?.querySelector(".prop-card");
+  if (!card || !propTrack) return 340;
+  const gap = parseFloat(getComputedStyle(propTrack).gap) || 16;
+  return card.getBoundingClientRect().width + gap;
+}
+
 function renderListings(filter) {
-  if (!propGrid) return;
+  if (!propTrack) return;
   const all = listingsPayload.listings || [];
-  const filtered = filter === "all" ? all : all.filter((item) => item.operation === filter);
-  const shown = filtered.slice(0, MAX_CARDS);
+  const shown = filter === "all" ? all : all.filter((item) => item.operation === filter);
   listingsEmpty.hidden = shown.length > 0;
-  propGrid.innerHTML = shown.map((item) => {
+  propTrack.innerHTML = shown.map((item) => {
     const meta = [item.area, item.rooms, item.baths].filter(Boolean)
       .map((bit) => `<li>${escapeHtml(bit)}</li>`).join("");
     const reserved = item.reserved ? `<span class="sold">Reservado</span>` : `<span>Disponible</span>`;
-    return `<a class="prop-card reveal is-in" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">
+    return `<a class="prop-card" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">
       <div class="prop-photo">
         <img src="${escapeHtml(item.image)}" alt="" loading="lazy" referrerpolicy="no-referrer">
         <div class="prop-badges">${reserved}<span>${escapeHtml(item.operation)}</span></div>
       </div>
       <div class="prop-body">
-        <p class="prop-price">${escapeHtml(item.price)}</p>
+        <p class="prop-price" data-price="${escapeHtml(item.price)}">0 €</p>
         <h3>${escapeHtml(item.title)}</h3>
         <ul class="prop-meta">${meta}</ul>
       </div>
     </a>`;
   }).join("");
+  if (propViewport) propViewport.scrollTo({ left: 0, behavior: "auto" });
+  animatePrices(propTrack.querySelectorAll("[data-price]"));
+}
+
+function parseEuro(text) {
+  const n = Number(String(text).replace(/[^\d,.-]/g, "").replace(/\./g, "").replace(",", "."));
+  return Number.isFinite(n) ? n : 0;
+}
+
+function formatEuro(value) {
+  return `${Math.round(value).toLocaleString("es-ES")} €`;
+}
+
+function countUp(el, target) {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || target <= 0) {
+    el.textContent = formatEuro(target);
+    return;
+  }
+  const duration = Math.min(1600, 700 + target / 400);
+  const start = performance.now();
+  const tick = (now) => {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = formatEuro(target * eased);
+    if (t < 1) window.requestAnimationFrame(tick);
+  };
+  window.requestAnimationFrame(tick);
+}
+
+function animatePrices(nodes) {
+  const ioPrice = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      ioPrice.unobserve(el);
+      countUp(el, parseEuro(el.dataset.price));
+    });
+  }, { threshold: 0.4 });
+  nodes.forEach((el) => ioPrice.observe(el));
 }
 
 renderListings("all");
+
 document.querySelectorAll(".listing-filters button").forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".listing-filters button").forEach((other) => other.classList.remove("is-on"));
+    document.querySelectorAll(".listing-filters button").forEach((other) => {
+      other.classList.remove("is-on");
+      other.setAttribute("aria-selected", "false");
+    });
     btn.classList.add("is-on");
+    btn.setAttribute("aria-selected", "true");
     renderListings(btn.dataset.filter);
+  });
+});
+
+document.querySelectorAll(".prop-nav").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const dir = Number(btn.dataset.dir) || 1;
+    propViewport?.scrollBy({ left: dir * cardWidth(), behavior: "smooth" });
   });
 });
 

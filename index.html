@@ -49,8 +49,8 @@
     <nav class="nav" id="menu-principal" aria-label="Principal">
       <a href="#nosotros">Nosotros</a>
       <a href="#servicios">Servicios</a>
-      <a href="#inmuebles">Inmuebles</a>
       <a href="#metodo">Método</a>
+      <a href="#inmuebles">Inmuebles</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="header-actions">
@@ -62,7 +62,7 @@
   <main id="contenido">
     <section class="hero" id="inicio">
       <div class="hero-media">
-        <img class="hero-ken" src="assets/fachada.jpg" width="1600" height="1397" fetchpriority="high" decoding="async" alt="Fachada de MR. Real Estate en Avenida Campoamor, 18, Salamanca, con el logo dorado sobre mármol.">
+        <img class="hero-ken" src="assets/fachada.jpg" width="970" height="619" fetchpriority="high" decoding="async" alt="Fachada de MR. Real Estate en Avenida Campoamor, 18, Salamanca, con el logo dorado sobre mármol.">
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-inner">
@@ -90,7 +90,7 @@
         <a class="link-line" href="#contacto">Hablar con el asesor <span>→</span></a>
       </div>
       <div class="about-photo reveal">
-        <img src="assets/asesor-retrato.jpg" width="2536" height="3120" decoding="async" alt="Asesor de MR. Real Estate atendiendo en la oficina de Salamanca.">
+        <img src="assets/asesor-retrato.jpg" width="2633" height="3815" decoding="async" alt="Asesor de MR. Real Estate en la oficina de Salamanca.">
       </div>
     </section>
 
@@ -129,23 +129,6 @@
       </div>
     </section>
 
-    <section class="listings" id="inmuebles">
-      <p class="pill pill-ink reveal">Nuestras propiedades</p>
-      <h2 class="reveal">Descubre la cartera en Salamanca</h2>
-      <p class="reveal listings-lead">Anuncios reales de nuestra tienda en Milanuncios. Una muestra de alquiler y venta; el listado vivo está en el portal.</p>
-      <div class="listing-filters reveal" role="tablist" aria-label="Filtrar anuncios">
-        <button type="button" class="is-on" data-filter="all">Todas</button>
-        <button type="button" data-filter="Alquiler">Alquiler</button>
-        <button type="button" data-filter="Venta">Venta</button>
-      </div>
-      <div class="prop-grid" id="prop-grid"></div>
-      <p class="listings-empty" id="listings-empty" hidden>No hay anuncios en este filtro. Mira la tienda completa en Milanuncios.</p>
-      <div class="listing-links reveal">
-        <a class="btn btn-solid" href="https://www.milanuncios.com/tiendas-profesionales/mr-real-estate-554544" target="_blank" rel="noreferrer">Ver todos los anuncios</a>
-        <a class="btn btn-ghost" href="#contacto" data-intent="Quiero comprar">Encargo privado</a>
-      </div>
-    </section>
-
     <section class="method" id="metodo">
       <div class="method-head reveal">
         <div>
@@ -178,6 +161,29 @@
       </div>
     </section>
 
+    <section class="listings" id="inmuebles">
+      <p class="pill pill-ink reveal">Nuestras propiedades</p>
+      <h2 class="reveal">Descubre la cartera en Salamanca</h2>
+      <p class="reveal listings-lead">Anuncios reales de nuestra tienda en Milanuncios. Elige Todas, Alquiler o Venta y desliza el carrusel.</p>
+      <div class="listing-filters reveal" role="tablist" aria-label="Filtrar anuncios">
+        <button type="button" class="is-on" data-filter="all" aria-selected="true">Todas</button>
+        <button type="button" data-filter="Alquiler" aria-selected="false">Alquiler</button>
+        <button type="button" data-filter="Venta" aria-selected="false">Venta</button>
+      </div>
+      <div class="prop-carousel reveal">
+        <button class="prop-nav" type="button" data-dir="-1" aria-label="Anuncio anterior">‹</button>
+        <div class="prop-viewport" id="prop-viewport" tabindex="0">
+          <div class="prop-track" id="prop-track"></div>
+        </div>
+        <button class="prop-nav" type="button" data-dir="1" aria-label="Anuncio siguiente">›</button>
+      </div>
+      <p class="listings-empty" id="listings-empty" hidden>No hay anuncios en este filtro. Mira la tienda completa en Milanuncios.</p>
+      <div class="listing-links reveal">
+        <a class="btn btn-solid" href="https://www.milanuncios.com/tiendas-profesionales/mr-real-estate-554544" target="_blank" rel="noreferrer">Ver todos los anuncios</a>
+        <a class="btn btn-ghost" href="#contacto" data-intent="Quiero comprar">Encargo privado</a>
+      </div>
+    </section>
+
     <section class="quotes" id="oficina">
       <p class="pill pill-ink reveal">Prueba social</p>
       <h2 class="reveal">Así nos recuerdan quienes ya firmaron</h2>
@@ -206,9 +212,7 @@
     </section>
 
     <section class="contact-band" id="contacto">
-      <div class="band-bg">
-        <img src="assets/asesor-contacto.jpg" width="3549" height="1941" alt="" aria-hidden="true" decoding="async">
-      </div>
+      <div class="band-bg"></div>
       <div class="contact-wrap">
         <form id="captacion" class="frost-form reveal" novalidate>
           <label>Nombre <input type="text" name="nombre" autocomplete="name" required placeholder="Nombre completo"></label>
@@ -234,15 +238,20 @@
           <p class="form-note">Al enviar se abre WhatsApp con tu consulta. No usamos tus datos para publicidad de terceros.</p>
           <p class="status" id="form-status" role="status"></p>
         </form>
-        <div class="contact-copy reveal">
-          <h2>Contáctanos para ver cómo te podemos ayudar</h2>
-          <p>WhatsApp, llamada u oficina en Av. Campoamor, 18. Respuesta en horario comercial.</p>
-          <ul class="contact-list">
-            <li><a class="wa-direct" href="https://wa.me/34653108039">Envíanos un WhatsApp</a></li>
-            <li><a class="tel-direct" href="tel:+34653108039">Llámanos al 653 108 039</a></li>
-            <li><a href="https://www.instagram.com/mr.realestate__" target="_blank" rel="noreferrer">Instagram @mr.realestate__</a></li>
-            <li><a href="https://maps.google.com/?q=Av.+Campoamor+18,+37003+Salamanca" target="_blank" rel="noreferrer">Cómo llegar · Av. Campoamor, 18, 37003</a></li>
-          </ul>
+        <div class="contact-side reveal">
+          <div class="contact-copy">
+            <h2>Contáctanos para ver cómo te podemos ayudar</h2>
+            <p>WhatsApp, llamada u oficina en Av. Campoamor, 18. Respuesta en horario comercial.</p>
+            <ul class="contact-list">
+              <li><a class="wa-direct" href="https://wa.me/34653108039">Envíanos un WhatsApp</a></li>
+              <li><a class="tel-direct" href="tel:+34653108039">Llámanos al 653 108 039</a></li>
+              <li><a href="https://www.instagram.com/mr.realestate__" target="_blank" rel="noreferrer">Instagram @mr.realestate__</a></li>
+              <li><a href="https://maps.google.com/?q=Av.+Campoamor+18,+37003+Salamanca" target="_blank" rel="noreferrer">Cómo llegar · Av. Campoamor, 18, 37003</a></li>
+            </ul>
+          </div>
+          <figure class="contact-shot">
+            <img src="assets/asesor-contacto.jpg" width="3549" height="1941" alt="Asesor de MR. Real Estate atendiendo una llamada en la oficina." decoding="async">
+          </figure>
         </div>
       </div>
     </section>
