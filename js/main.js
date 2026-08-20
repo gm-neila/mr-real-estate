@@ -1,9 +1,13 @@
 const WHATSAPP = "34653108039";
 
+function dismissLoader() {
+  document.documentElement.classList.remove("is-loading");
+  document.body.classList.remove("is-loading");
+}
 window.addEventListener("load", () => {
-  window.setTimeout(() => document.body.classList.remove("is-loading"), 700);
+  window.setTimeout(dismissLoader, 700);
 });
-window.setTimeout(() => document.body.classList.remove("is-loading"), 2400);
+window.setTimeout(dismissLoader, 2400);
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -21,15 +25,20 @@ document.querySelectorAll(".nav a").forEach((link) => {
   });
 });
 
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("is-in");
-      io.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.16 });
-document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+const revealNodes = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
+  revealNodes.forEach((el) => io.observe(el));
+} else {
+  revealNodes.forEach((el) => el.classList.add("is-in"));
+}
 
 document.querySelectorAll("[data-open]").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -103,19 +112,22 @@ if (video && !reduceMotion) {
     }
     video.play().catch(() => {});
   };
-  const videoIo = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        loadAndPlay();
-        videoIo.disconnect();
-      }
-    });
-  }, { rootMargin: "180px" });
-  videoIo.observe(video);
-  video.addEventListener("error", () => video.closest(".band-reel")?.remove());
+  if ("IntersectionObserver" in window) {
+    const videoIo = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          loadAndPlay();
+          videoIo.disconnect();
+        }
+      });
+    }, { rootMargin: "180px" });
+    videoIo.observe(video);
+  } else {
+    loadAndPlay();
+  }
 }
 
-const listingsPayload = window.MR_LISTINGS || { listings: [] };
+let listingsPayload = { listings: [] };
 const propTrack = document.getElementById("prop-track");
 const propViewport = document.getElementById("prop-viewport");
 const listingsEmpty = document.getElementById("listings-empty");
@@ -134,18 +146,14 @@ function cardWidth() {
   return card.getBoundingClientRect().width + gap;
 }
 
-function renderListings(filter) {
-  if (!propTrack) return;
-  const all = listingsPayload.listings || [];
-  const shown = filter === "all" ? all : all.filter((item) => item.operation === filter);
-  listingsEmpty.hidden = shown.length > 0;
-  propTrack.innerHTML = shown.map((item) => {
-    const meta = [item.area, item.rooms, item.baths].filter(Boolean)
-      .map((bit) => `<li>${escapeHtml(bit)}</li>`).join("");
-    const reserved = item.reserved ? `<span class="sold">Reservado</span>` : `<span>Disponible</span>`;
-    return `<a class="prop-card" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">
+function listingCard(item, eager) {
+  const meta = [item.area, item.rooms, item.baths].filter(Boolean)
+    .map((bit) => `<li>${escapeHtml(bit)}</li>`).join("");
+  const reserved = item.reserved ? `<span class="sold">Reservado</span>` : `<span>Disponible</span>`;
+  const loading = eager ? `fetchpriority="high"` : `loading="lazy"`;
+  return `<a class="prop-card" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">
       <div class="prop-photo">
-        <img src="${escapeHtml(item.image)}" alt="" loading="lazy" referrerpolicy="no-referrer">
+        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" ${loading} decoding="async">
         <div class="prop-badges">${reserved}<span>${escapeHtml(item.operation)}</span></div>
       </div>
       <div class="prop-body">
@@ -154,9 +162,43 @@ function renderListings(filter) {
         <ul class="prop-meta">${meta}</ul>
       </div>
     </a>`;
-  }).join("");
+}
+
+function renderListings(filter) {
+  if (!propTrack) return;
+  const all = listingsPayload.listings || [];
+  const shown = filter === "all" ? all : all.filter((item) => item.operation === filter);
+  if (!shown.length) {
+    if (!all.length && propTrack.children.length) {
+      if (listingsEmpty) listingsEmpty.hidden = true;
+      return;
+    }
+    if (listingsEmpty) listingsEmpty.hidden = false;
+    propTrack.innerHTML = "";
+    return;
+  }
+  if (listingsEmpty) listingsEmpty.hidden = true;
+  propTrack.innerHTML = shown.map((item, i) => listingCard(item, i < 2)).join("");
   if (propViewport) propViewport.scrollTo({ left: 0, behavior: "auto" });
   animatePrices(propTrack.querySelectorAll("[data-price]"));
+}
+
+function payloadHasListings(data) {
+  return Boolean(data && Array.isArray(data.listings) && data.listings.length);
+}
+
+function bootListings(data) {
+  listingsPayload = payloadHasListings(data) ? data : { listings: [] };
+  renderListings("all");
+}
+
+if (payloadHasListings(window.MR_LISTINGS)) {
+  bootListings(window.MR_LISTINGS);
+} else {
+  fetch("data/listings.json", { cache: "no-cache" })
+    .then((res) => (res.ok ? res.json() : Promise.reject()))
+    .then(bootListings)
+    .catch(() => bootListings({ listings: [] }));
 }
 
 function parseEuro(text) {
@@ -186,6 +228,11 @@ function countUp(el, target) {
 }
 
 function animatePrices(nodes) {
+  if (!nodes.length) return;
+  if (!("IntersectionObserver" in window)) {
+    nodes.forEach((el) => countUp(el, parseEuro(el.dataset.price)));
+    return;
+  }
   const ioPrice = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -196,8 +243,6 @@ function animatePrices(nodes) {
   }, { threshold: 0.4 });
   nodes.forEach((el) => ioPrice.observe(el));
 }
-
-renderListings("all");
 
 document.querySelectorAll(".listing-filters button").forEach((btn) => {
   btn.addEventListener("click", () => {

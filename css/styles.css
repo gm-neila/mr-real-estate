@@ -28,6 +28,8 @@ h1, h2, h3 { font-family: "Libre Bodoni", serif; font-weight: 600; line-height: 
   position: fixed; inset: 0; z-index: 80;
   display: grid; place-items: center;
   pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
 }
 .loader-panel {
   position: absolute; inset: 0;
@@ -35,8 +37,16 @@ h1, h2, h3 { font-family: "Libre Bodoni", serif; font-weight: 600; line-height: 
   transition: opacity .9s var(--ease), visibility .9s;
 }
 .loader img { position: relative; width: min(280px, 70vw); z-index: 1; }
-body:not(.is-loading) .loader-panel,
-body:not(.is-loading) .loader img { opacity: 0; visibility: hidden; }
+html.js.is-loading .loader {
+  opacity: 1;
+  visibility: visible;
+}
+html.js:not(.is-loading) .loader,
+html.js:not(.is-loading) .loader-panel,
+html.js:not(.is-loading) .loader img {
+  opacity: 0;
+  visibility: hidden;
+}
 
 .topbar {
   display: flex; gap: 1.5rem; justify-content: space-between;
@@ -286,6 +296,7 @@ body:not(.is-loading) .loader img { opacity: 0; visibility: hidden; }
   opacity: .82;
 }
 .listings-empty { margin: 0 0 1rem; }
+.listings-empty[hidden] { display: none; }
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -584,8 +595,8 @@ blockquote footer small { display: block; color: var(--gold); font-size: .85rem;
 }
 .dialog-inner p { margin: 0 0 1rem; }
 
-.reveal { opacity: 0; transform: translateY(28px); transition: 1s var(--ease); }
-.reveal.is-in { opacity: 1; transform: none; }
+html.js .reveal { opacity: 0; transform: translateY(28px); transition: 1s var(--ease); }
+html.js .reveal.is-in { opacity: 1; transform: none; }
 
 @media (max-width: 1024px) {
   .about, .contact-wrap, .method-head, .band-grid { grid-template-columns: 1fr; }
@@ -626,5 +637,6 @@ blockquote footer small { display: block; color: var(--gold); font-size: .85rem;
   .listing-links .btn { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .anim, .reveal, .hero-ken { animation: none; opacity: 1; transform: none; }
+  .anim, .hero-ken { animation: none; opacity: 1; transform: none; }
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
 }
