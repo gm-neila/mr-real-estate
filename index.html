@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>
-    document.documentElement.classList.add("js", "is-loading");
-    document.write('<base href="' + (location.hostname === "gm-neila.github.io" ? "https://gm-neila.github.io/mr-real-estate/" : "./") + '">');
-    window.setTimeout(function () { document.documentElement.classList.remove("is-loading"); }, 2400);
+    document.documentElement.classList.add("js");
+    var base = location.hostname === "gm-neila.github.io" ? "https://gm-neila.github.io/mr-real-estate/" : "./";
+    document.head.insertAdjacentHTML("afterbegin", '<base href="' + base + '">');
   </script>
   <noscript>
     <base href="https://gm-neila.github.io/mr-real-estate/">
     <style>
-      .loader { display: none !important; }
       .reveal, .anim { opacity: 1 !important; transform: none !important; }
     </style>
   </noscript>
@@ -33,16 +32,11 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@600;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
-
-  <div id="loader" class="loader" aria-hidden="true">
-    <div class="loader-panel"></div>
-    <img src="assets/logo.svg" alt="MR. Real Estate">
-  </div>
 
   <div class="topbar">
     <a class="tel-direct" href="tel:+34653108039">Llámanos · 653 108 039</a>
@@ -102,7 +96,7 @@
         <a class="link-line" href="#contacto">Hablar con el asesor <span>→</span></a>
       </div>
       <div class="about-photo reveal">
-        <img src="assets/asesor-retrato.jpg" width="2633" height="3815" decoding="async" alt="Asesor de MR. Real Estate en la oficina de Salamanca.">
+        <img src="assets/asesor-retrato.jpg" width="840" height="1217" decoding="async" alt="Asesor de MR. Real Estate en la oficina de Salamanca.">
       </div>
     </section>
 
@@ -118,7 +112,7 @@
           <div class="frost-grid">
             <article class="frost-card reveal">
               <h3>Venta y comercialización</h3>
-              <p>Portales líderes, reportaje profesional y filtro de compradores solventes. Recorridos virtuales cuando aportan.</p>
+              <p>Publicidad en Milanuncios y Fotocasa, reportaje fotográfico y filtro de compradores. Recorridos virtuales cuando el encargo lo pide.</p>
             </article>
             <article class="frost-card reveal">
               <h3>Asesoría hipotecaria</h3>
@@ -135,8 +129,7 @@
           </div>
         </div>
         <figure class="band-reel reveal">
-          <video class="band-video" muted loop playsinline preload="metadata" poster="assets/oficina-interior.jpg" data-src="assets/oficina.mp4" aria-label="Vídeo de la oficina de MR. Real Estate en Av. Campoamor, 18">
-            <source src="assets/oficina.mp4" type="video/mp4">
+          <video class="band-video" controls playsinline preload="none" poster="assets/oficina-interior.jpg" data-src="assets/oficina.mp4" aria-label="Vídeo de la oficina de MR. Real Estate en Av. Campoamor, 18">
           </video>
           <figcaption>Nuestra oficina en Av. Campoamor, 18, Salamanca</figcaption>
         </figure>
@@ -179,327 +172,424 @@
       <p class="pill pill-ink reveal">Nuestras propiedades</p>
       <h2 class="reveal">Descubre la cartera en Salamanca</h2>
       <p class="reveal listings-lead">Cartera propia en Salamanca. Abre cada ficha en esta web: fotos, texto y contacto directo.</p>
-      <div class="listing-filters reveal" role="tablist" aria-label="Filtrar anuncios">
-        <button type="button" class="is-on" data-filter="all" aria-selected="true">Todas</button>
-        <button type="button" data-filter="Alquiler" aria-selected="false">Alquiler</button>
-        <button type="button" data-filter="Venta" aria-selected="false">Venta</button>
+      <div class="listing-filters reveal" aria-label="Filtrar anuncios">
+        <button type="button" class="is-on" data-filter="all">Todas</button>
+        <button type="button" data-filter="Alquiler">Alquiler</button>
+        <button type="button" data-filter="Venta">Venta</button>
+        <button type="button" data-filter="Habitación">Habitaciones</button>
       </div>
+      <p class="listings-kicker reveal">Destacados</p>
       <div class="prop-carousel reveal">
         <button class="prop-nav" type="button" data-dir="-1" aria-label="Anuncio anterior">‹</button>
         <div class="prop-viewport" id="prop-viewport" tabindex="0">
-          <div class="prop-track" id="prop-track">
-        <a class="prop-card" href="inmueble.html?id=610471112">
+          <!--TRACK_START-->
+        <div class="prop-track" id="prop-track">
+        <a class="prop-card" href="inmuebles/610471112/">
           <div class="prop-photo">
-            <img src="assets/listings/610471112/01.jpg" alt="Alquiler de pisos en Salamanca" fetchpriority="high" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
+            <img src="assets/listings/610471112/01.jpg" alt="Piso amueblado de 70 m² para el curso, 3 dormitorios" width="640" height="400" fetchpriority="high" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Alquiler</span></div>
           </div>
           <div class="prop-body">
             <p class="prop-price" data-price="750 €">750 €</p>
-            <h3>Alquiler de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>70 m²</li><li>3 dorm.</li><li>1 baños</li></ul>
+            <h3>Piso amueblado de 70 m² para el curso, 3 dormitorios</h3>
+            <ul class="prop-meta"><li>70 m²</li><li>3 dorm.</li><li>1 baño</li></ul>
           </div>
         </a>
-        <a class="prop-card" href="inmueble.html?id=610910295">
+        <a class="prop-card" href="inmuebles/610910295/">
           <div class="prop-photo">
-            <img src="assets/listings/610910295/01.jpg" alt="PISO DE ESTUDIANTES" fetchpriority="high" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
+            <img src="assets/listings/610910295/01.jpg" alt="Piso de estudiantes de 90 m², 5 habitaciones" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Alquiler</span></div>
           </div>
           <div class="prop-body">
             <p class="prop-price" data-price="390 €">390 €</p>
-            <h3>PISO DE ESTUDIANTES</h3>
+            <h3>Piso de estudiantes de 90 m², 5 habitaciones</h3>
             <ul class="prop-meta"><li>90 m²</li><li>5 dorm.</li><li>3 baños</li></ul>
           </div>
         </a>
-        <a class="prop-card" href="inmueble.html?id=586931041">
+        <a class="prop-card" href="inmuebles/586931041/">
           <div class="prop-photo">
-            <img src="assets/listings/586931041/01.jpg" alt="Alquiler de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
+            <img src="assets/listings/586931041/01.jpg" alt="Habitación de 14 m² a 5 minutos de Plaza Mayor" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
           </div>
           <div class="prop-body">
             <p class="prop-price" data-price="360 €">360 €</p>
-            <h3>Alquiler de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>14 m²</li><li>4 dorm.</li><li>2 baños</li></ul>
+            <h3>Habitación de 14 m² a 5 minutos de Plaza Mayor</h3>
+            <ul class="prop-meta"><li>14 m²</li><li>en piso de 4 dorm.</li><li>2 baños</li></ul>
           </div>
         </a>
-        <a class="prop-card" href="inmueble.html?id=610769974">
+        <a class="prop-card" href="inmuebles/610769974/">
           <div class="prop-photo">
-            <img src="assets/listings/610769974/01.jpg" alt="HABITACIÓN SOLO PARA CHICAS" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
+            <img src="assets/listings/610769974/01.jpg" alt="Habitación en piso compartido, zona universitaria" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
           </div>
           <div class="prop-body">
             <p class="prop-price" data-price="350 €">350 €</p>
-            <h3>HABITACIÓN SOLO PARA CHICAS</h3>
-            <ul class="prop-meta"><li>80 m²</li><li>3 dorm.</li><li>2 baños</li></ul>
+            <h3>Habitación en piso compartido, zona universitaria</h3>
+            <ul class="prop-meta"><li>12 m²</li><li>en piso de 3 dorm.</li><li>2 baños</li></ul>
           </div>
         </a>
-        <a class="prop-card" href="inmueble.html?id=594791102">
+        <a class="prop-card" href="inmuebles/594791102/">
           <div class="prop-photo">
-            <img src="assets/listings/594791102/01.jpg" alt="Venta de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
+            <img src="assets/listings/594791102/01.jpg" alt="Piso de 90 m² y 3 dormitorios en Salamanca" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
           </div>
           <div class="prop-body">
             <p class="prop-price" data-price="164.999 €">164.999 €</p>
-            <h3>Venta de pisos en Salamanca</h3>
+            <h3>Piso de 90 m² y 3 dormitorios en Salamanca</h3>
             <ul class="prop-meta"><li>90 m²</li><li>3 dorm.</li><li>2 baños</li></ul>
           </div>
         </a>
-        <a class="prop-card" href="inmueble.html?id=594941186">
+        <a class="prop-card" href="inmuebles/594941186/">
           <div class="prop-photo">
-            <img src="assets/listings/594941186/01.jpg" alt="Venta de áticos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
+            <img src="assets/listings/594941186/01.jpg" alt="Ático de 66 m² y 1 dormitorio en Salamanca" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Ático</span><span>Venta</span></div>
           </div>
           <div class="prop-body">
             <p class="prop-price" data-price="159.900 €">159.900 €</p>
-            <h3>Venta de áticos en Salamanca</h3>
-            <ul class="prop-meta"><li>66 m²</li><li>1 dorm.</li><li>1 baños</li></ul>
+            <h3>Ático de 66 m² y 1 dormitorio en Salamanca</h3>
+            <ul class="prop-meta"><li>66 m²</li><li>1 dorm.</li><li>1 baño</li></ul>
           </div>
         </a>
-        <a class="prop-card" href="inmueble.html?id=610472737">
+        <a class="prop-card" href="inmuebles/602529188/">
           <div class="prop-photo">
-            <img src="assets/listings/610472737/01.jpg" alt="HABITACIÓN PARA ESTUDIANTES" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="285 €">285 €</p>
-            <h3>HABITACIÓN PARA ESTUDIANTES</h3>
-            <ul class="prop-meta"><li>90 m²</li><li>3 dorm.</li><li>2 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=609938217">
-          <div class="prop-photo">
-            <img src="assets/listings/609938217/01.jpg" alt="2ª planta exterior con ascensor" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="950 €">950 €</p>
-            <h3>2ª planta exterior con ascensor</h3>
-            <ul class="prop-meta"><li>100 m²</li><li>4 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=591884823">
-          <div class="prop-photo">
-            <img src="assets/listings/591884823/01.jpg" alt="Alquiler de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="1000 €">1000 €</p>
-            <h3>Alquiler de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>100 m²</li><li>4 dorm.</li><li>2 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=609940888">
-          <div class="prop-photo">
-            <img src="assets/listings/609940888/01.jpg" alt="PISO DE ESTUDIANTES" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="1099 €">1099 €</p>
-            <h3>PISO DE ESTUDIANTES</h3>
-            <ul class="prop-meta"><li>112 m²</li><li>4 dorm.</li><li>2 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=609939973">
-          <div class="prop-photo">
-            <img src="assets/listings/609939973/01.jpg" alt="HABITACIONES PARA ESTUDIANTES" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="270 €">270 €</p>
-            <h3>HABITACIONES PARA ESTUDIANTES</h3>
-            <ul class="prop-meta"><li>100 m²</li><li>4 dorm.</li><li>2 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=602529188">
-          <div class="prop-photo">
-            <img src="assets/listings/602529188/01.jpg" alt="Venta de garajes en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
+            <img src="assets/listings/602529188/01.jpg" alt="Garaje en calle Méjico, 13 m²" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Garaje</span><span>Venta</span></div>
           </div>
           <div class="prop-body">
             <p class="prop-price" data-price="16.500 €">16.500 €</p>
-            <h3>Venta de garajes en Salamanca</h3>
-            <ul class="prop-meta"></ul>
+            <h3>Garaje en calle Méjico, 13 m²</h3>
+            <ul class="prop-meta"><li>13 m²</li></ul>
           </div>
         </a>
-        <a class="prop-card" href="inmueble.html?id=609806618">
+        <a class="prop-card" href="inmuebles/608986102/">
           <div class="prop-photo">
-            <img src="assets/listings/609806618/01.jpg" alt="grupo de chicas estudiantes" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="999 €">999 €</p>
-            <h3>grupo de chicas estudiantes</h3>
-            <ul class="prop-meta"><li>100 m²</li><li>4 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=609798299">
-          <div class="prop-photo">
-            <img src="assets/listings/609798299/01.jpg" alt="HABITACIÓN EN ALQUILER | AVENIDA FILIBERTO VILLALOBOS" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="370 €">370 €</p>
-            <h3>HABITACIÓN EN ALQUILER | AVENIDA FILIBERTO VILLALOBOS</h3>
-            <ul class="prop-meta"><li>80 m²</li><li>3 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=609797677">
-          <div class="prop-photo">
-            <img src="assets/listings/609797677/01.jpg" alt="HABITACIÓN EN ALQUILER | AVENIDA FILIBERTO VILLALOBOS" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="360 €">360 €</p>
-            <h3>HABITACIÓN EN ALQUILER | AVENIDA FILIBERTO VILLALOBOS</h3>
-            <ul class="prop-meta"><li>80 m²</li><li>3 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=609796669">
-          <div class="prop-photo">
-            <img src="assets/listings/609796669/01.jpg" alt="Alquiler de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="375 €">375 €</p>
-            <h3>Alquiler de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>80 m²</li><li>3 dorm.</li><li>2 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=609535248">
-          <div class="prop-photo">
-            <img src="assets/listings/609535248/01.jpg" alt="HABITACIÓN EN ALQUILER" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="420 €">420 €</p>
-            <h3>HABITACIÓN EN ALQUILER</h3>
-            <ul class="prop-meta"><li>17 m²</li><li>1 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=608986102">
-          <div class="prop-photo">
-            <img src="assets/listings/608986102/01.jpg" alt="Venta de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
+            <img src="assets/listings/608986102/01.jpg" alt="Bajo reformado de 65 m² y 2 dormitorios" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
           </div>
           <div class="prop-body">
             <p class="prop-price" data-price="150.000 €">150.000 €</p>
-            <h3>Venta de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>65 m²</li><li>2 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=594210918">
-          <div class="prop-photo">
-            <img src="assets/listings/594210918/01.jpg" alt="Venta de estudios en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="150.000 €">150.000 €</p>
-            <h3>Venta de estudios en Salamanca</h3>
-            <ul class="prop-meta"><li>55 m²</li><li>1 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=585471870">
-          <div class="prop-photo">
-            <img src="assets/listings/585471870/01.jpg" alt="Venta de pisos en San Cristobal de la Cuesta" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="129.900 €">129.900 €</p>
-            <h3>Venta de pisos en San Cristobal de la Cuesta</h3>
-            <ul class="prop-meta"><li>86 m²</li><li>2 dorm.</li><li>2 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=587030127">
-          <div class="prop-photo">
-            <img src="assets/listings/587030127/01.jpg" alt="Alquiler de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="320 €">320 €</p>
-            <h3>Alquiler de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>12 m²</li><li>4 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=596918803">
-          <div class="prop-photo">
-            <img src="assets/listings/596918803/01.jpg" alt="Venta de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="150.000 €">150.000 €</p>
-            <h3>Venta de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>55 m²</li><li>3 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=585613278">
-          <div class="prop-photo">
-            <img src="assets/listings/585613278/01.jpg" alt="Venta de pisos en Calvarrasa de Abajo" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="77.000 €">77.000 €</p>
-            <h3>Venta de pisos en Calvarrasa de Abajo</h3>
-            <ul class="prop-meta"><li>70 m²</li><li>1 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=606831251">
-          <div class="prop-photo">
-            <img src="assets/listings/606831251/01.jpg" alt="Venta de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="244.900 €">244.900 €</p>
-            <h3>Venta de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>105 m²</li><li>3 dorm.</li><li>2 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=587451792">
-          <div class="prop-photo">
-            <img src="assets/listings/587451792/01.jpg" alt="Venta de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="189.900 €">189.900 €</p>
-            <h3>Venta de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>115 m²</li><li>4 dorm.</li><li>2 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=593685222">
-          <div class="prop-photo">
-            <img src="assets/listings/593685222/01.jpg" alt="Alquiler de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="975 €">975 €</p>
-            <h3>Alquiler de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>60 m²</li><li>3 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=594212769">
-          <div class="prop-photo">
-            <img src="assets/listings/594212769/01.jpg" alt="Alquiler de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Alquiler</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="790 €">790 €</p>
-            <h3>Alquiler de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>55 m²</li><li>1 dorm.</li><li>1 baños</li></ul>
-          </div>
-        </a>
-        <a class="prop-card" href="inmueble.html?id=585600025">
-          <div class="prop-photo">
-            <img src="assets/listings/585600025/01.jpg" alt="Venta de pisos en Salamanca" loading="lazy" decoding="async">
-            <div class="prop-badges"><span>Disponible</span><span>Venta</span></div>
-          </div>
-          <div class="prop-body">
-            <p class="prop-price" data-price="129.900 €">129.900 €</p>
-            <h3>Venta de pisos en Salamanca</h3>
-            <ul class="prop-meta"><li>62 m²</li><li>2 dorm.</li><li>1 baños</li></ul>
+            <h3>Bajo reformado de 65 m² y 2 dormitorios</h3>
+            <ul class="prop-meta"><li>65 m²</li><li>2 dorm.</li><li>1 baño</li></ul>
           </div>
         </a>
         </div>
+        <!--TRACK_END-->
         </div>
         <button class="prop-nav" type="button" data-dir="1" aria-label="Anuncio siguiente">›</button>
       </div>
+      <p class="listings-kicker reveal">Toda la cartera</p>
+      <!--GRID_START-->
+      <div class="prop-grid" id="prop-grid">
+        <a class="prop-card" href="inmuebles/610471112/">
+          <div class="prop-photo">
+            <img src="assets/listings/610471112/01.jpg" alt="Piso amueblado de 70 m² para el curso, 3 dormitorios" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="750 €">750 €</p>
+            <h3>Piso amueblado de 70 m² para el curso, 3 dormitorios</h3>
+            <ul class="prop-meta"><li>70 m²</li><li>3 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/610910295/">
+          <div class="prop-photo">
+            <img src="assets/listings/610910295/01.jpg" alt="Piso de estudiantes de 90 m², 5 habitaciones" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="390 €">390 €</p>
+            <h3>Piso de estudiantes de 90 m², 5 habitaciones</h3>
+            <ul class="prop-meta"><li>90 m²</li><li>5 dorm.</li><li>3 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/586931041/">
+          <div class="prop-photo">
+            <img src="assets/listings/586931041/01.jpg" alt="Habitación de 14 m² a 5 minutos de Plaza Mayor" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="360 €">360 €</p>
+            <h3>Habitación de 14 m² a 5 minutos de Plaza Mayor</h3>
+            <ul class="prop-meta"><li>14 m²</li><li>en piso de 4 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/610769974/">
+          <div class="prop-photo">
+            <img src="assets/listings/610769974/01.jpg" alt="Habitación en piso compartido, zona universitaria" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="350 €">350 €</p>
+            <h3>Habitación en piso compartido, zona universitaria</h3>
+            <ul class="prop-meta"><li>12 m²</li><li>en piso de 3 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/594791102/">
+          <div class="prop-photo">
+            <img src="assets/listings/594791102/01.jpg" alt="Piso de 90 m² y 3 dormitorios en Salamanca" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="164.999 €">164.999 €</p>
+            <h3>Piso de 90 m² y 3 dormitorios en Salamanca</h3>
+            <ul class="prop-meta"><li>90 m²</li><li>3 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/594941186/">
+          <div class="prop-photo">
+            <img src="assets/listings/594941186/01.jpg" alt="Ático de 66 m² y 1 dormitorio en Salamanca" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Ático</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="159.900 €">159.900 €</p>
+            <h3>Ático de 66 m² y 1 dormitorio en Salamanca</h3>
+            <ul class="prop-meta"><li>66 m²</li><li>1 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/610472737/">
+          <div class="prop-photo">
+            <img src="assets/listings/610472737/01.jpg" alt="Habitación para estudiantes en piso compartido" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="285 €">285 €</p>
+            <h3>Habitación para estudiantes en piso compartido</h3>
+            <ul class="prop-meta"><li>90 m²</li><li>en piso de 3 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/609938217/">
+          <div class="prop-photo">
+            <img src="assets/listings/609938217/01.jpg" alt="Piso de 100 m² en 2ª planta con ascensor" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="950 €">950 €</p>
+            <h3>Piso de 100 m² en 2ª planta con ascensor</h3>
+            <ul class="prop-meta"><li>100 m²</li><li>4 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/591884823/">
+          <div class="prop-photo">
+            <img src="assets/listings/591884823/01.jpg" alt="Piso de 100 m² y 4 dormitorios en Salamanca" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="1000 €">1000 €</p>
+            <h3>Piso de 100 m² y 4 dormitorios en Salamanca</h3>
+            <ul class="prop-meta"><li>100 m²</li><li>4 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/609940888/">
+          <div class="prop-photo">
+            <img src="assets/listings/609940888/01.jpg" alt="Piso de estudiantes de 112 m², 4 habitaciones" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="1099 €">1099 €</p>
+            <h3>Piso de estudiantes de 112 m², 4 habitaciones</h3>
+            <ul class="prop-meta"><li>112 m²</li><li>4 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/609939973/">
+          <div class="prop-photo">
+            <img src="assets/listings/609939973/01.jpg" alt="Habitación en piso de estudiantes, 270 € al mes" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="270 €">270 €</p>
+            <h3>Habitación en piso de estudiantes, 270 € al mes</h3>
+            <ul class="prop-meta"><li>100 m²</li><li>en piso de 4 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/602529188/">
+          <div class="prop-photo">
+            <img src="assets/listings/602529188/01.jpg" alt="Garaje en calle Méjico, 13 m²" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Garaje</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="16.500 €">16.500 €</p>
+            <h3>Garaje en calle Méjico, 13 m²</h3>
+            <ul class="prop-meta"><li>13 m²</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/609806618/">
+          <div class="prop-photo">
+            <img src="assets/listings/609806618/01.jpg" alt="Piso de 100 m² para grupo de estudiantes" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="999 €">999 €</p>
+            <h3>Piso de 100 m² para grupo de estudiantes</h3>
+            <ul class="prop-meta"><li>100 m²</li><li>4 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/609798299/">
+          <div class="prop-photo">
+            <img src="assets/listings/609798299/01.jpg" alt="Habitación en Avenida Filiberto Villalobos, 370 €" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="370 €">370 €</p>
+            <h3>Habitación en Avenida Filiberto Villalobos, 370 €</h3>
+            <ul class="prop-meta"><li>80 m²</li><li>en piso de 3 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/609797677/">
+          <div class="prop-photo">
+            <img src="assets/listings/609797677/01.jpg" alt="Habitación en Avenida Filiberto Villalobos, 360 €" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="360 €">360 €</p>
+            <h3>Habitación en Avenida Filiberto Villalobos, 360 €</h3>
+            <ul class="prop-meta"><li>80 m²</li><li>en piso de 3 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/609796669/">
+          <div class="prop-photo">
+            <img src="assets/listings/609796669/01.jpg" alt="Habitación en calle Lucero, 375 € al mes" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="375 €">375 €</p>
+            <h3>Habitación en calle Lucero, 375 € al mes</h3>
+            <ul class="prop-meta"><li>80 m²</li><li>en piso de 3 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/609535248/">
+          <div class="prop-photo">
+            <img src="assets/listings/609535248/01.jpg" alt="Habitación de 17 m² en Salamanca, 420 €" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="420 €">420 €</p>
+            <h3>Habitación de 17 m² en Salamanca, 420 €</h3>
+            <ul class="prop-meta"><li>17 m²</li><li>en piso de 1 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/608986102/">
+          <div class="prop-photo">
+            <img src="assets/listings/608986102/01.jpg" alt="Bajo reformado de 65 m² y 2 dormitorios" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="150.000 €">150.000 €</p>
+            <h3>Bajo reformado de 65 m² y 2 dormitorios</h3>
+            <ul class="prop-meta"><li>65 m²</li><li>2 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/594210918/">
+          <div class="prop-photo">
+            <img src="assets/listings/594210918/01.jpg" alt="Loft-estudio de 55 m² junto a San Esteban" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Estudio</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="150.000 €">150.000 €</p>
+            <h3>Loft-estudio de 55 m² junto a San Esteban</h3>
+            <ul class="prop-meta"><li>55 m²</li><li>1 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/585471870/">
+          <div class="prop-photo">
+            <img src="assets/listings/585471870/01.jpg" alt="Piso de 86 m² en San Cristóbal de la Cuesta" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="129.900 €">129.900 €</p>
+            <h3>Piso de 86 m² en San Cristóbal de la Cuesta</h3>
+            <ul class="prop-meta"><li>86 m²</li><li>2 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/587030127/">
+          <div class="prop-photo">
+            <img src="assets/listings/587030127/01.jpg" alt="Habitación de 12 m² en Plaza del Oeste" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Habitación</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="320 €">320 €</p>
+            <h3>Habitación de 12 m² en Plaza del Oeste</h3>
+            <ul class="prop-meta"><li>12 m²</li><li>en piso de 4 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/596918803/">
+          <div class="prop-photo">
+            <img src="assets/listings/596918803/01.jpg" alt="Piso de 55 m² en 4ª planta, sin ascensor" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="150.000 €">150.000 €</p>
+            <h3>Piso de 55 m² en 4ª planta, sin ascensor</h3>
+            <ul class="prop-meta"><li>55 m²</li><li>3 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/585613278/">
+          <div class="prop-photo">
+            <img src="assets/listings/585613278/01.jpg" alt="Piso de 70 m² en Calvarrasa de Abajo" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="77.000 €">77.000 €</p>
+            <h3>Piso de 70 m² en Calvarrasa de Abajo</h3>
+            <ul class="prop-meta"><li>70 m²</li><li>1 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/606831251/">
+          <div class="prop-photo">
+            <img src="assets/listings/606831251/01.jpg" alt="Piso de 105 m² en Camino de las Aguas" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="244.900 €">244.900 €</p>
+            <h3>Piso de 105 m² en Camino de las Aguas</h3>
+            <ul class="prop-meta"><li>105 m²</li><li>3 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/587451792/">
+          <div class="prop-photo">
+            <img src="assets/listings/587451792/01.jpg" alt="Piso de 115 m² y 4 dormitorios en Salamanca" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="189.900 €">189.900 €</p>
+            <h3>Piso de 115 m² y 4 dormitorios en Salamanca</h3>
+            <ul class="prop-meta"><li>115 m²</li><li>4 dorm.</li><li>2 baños</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/593685222/">
+          <div class="prop-photo">
+            <img src="assets/listings/593685222/01.jpg" alt="Piso de 60 m² y 3 dormitorios, 975 € al mes" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="975 €">975 €</p>
+            <h3>Piso de 60 m² y 3 dormitorios, 975 € al mes</h3>
+            <ul class="prop-meta"><li>60 m²</li><li>3 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/594212769/">
+          <div class="prop-photo">
+            <img src="assets/listings/594212769/01.jpg" alt="Loft de 55 m² en alquiler junto a San Esteban" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Estudio</span><span>Alquiler</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="790 €">790 €</p>
+            <h3>Loft de 55 m² en alquiler junto a San Esteban</h3>
+            <ul class="prop-meta"><li>55 m²</li><li>1 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+        <a class="prop-card" href="inmuebles/585600025/">
+          <div class="prop-photo">
+            <img src="assets/listings/585600025/01.jpg" alt="Piso de 62 m² y 2 dormitorios en Salamanca" width="640" height="400" loading="lazy" decoding="async">
+            <div class="prop-badges"><span>Disponible</span><span>Piso</span><span>Venta</span></div>
+          </div>
+          <div class="prop-body">
+            <p class="prop-price" data-price="129.900 €">129.900 €</p>
+            <h3>Piso de 62 m² y 2 dormitorios en Salamanca</h3>
+            <ul class="prop-meta"><li>62 m²</li><li>2 dorm.</li><li>1 baño</li></ul>
+          </div>
+        </a>
+      </div>
+      <!--GRID_END-->
       <p class="listings-empty" id="listings-empty" hidden>No hay anuncios en este filtro.</p>
       <div class="listing-links reveal">
         <a class="btn btn-ghost" href="#contacto" data-intent="Quiero comprar">Encargo privado</a>
@@ -531,14 +621,15 @@
           </footer>
         </blockquote>
       </div>
+      <p class="quotes-note">Cuando el perfil de Google Business esté completo, enlazaremos las reseñas nominativas. Hasta entonces no publicamos nombres inventados.</p>
     </section>
 
     <section class="contact-band" id="contacto">
       <div class="band-bg"></div>
       <div class="contact-wrap">
         <form id="captacion" class="frost-form reveal" novalidate>
-          <label>Nombre <input type="text" name="nombre" autocomplete="name" required placeholder="Nombre completo"></label>
-          <label>Teléfono <input type="tel" name="telefono" autocomplete="tel" required placeholder="653 000 000"></label>
+          <label>Nombre <input type="text" name="nombre" autocomplete="name" required placeholder="Nombre completo…"></label>
+          <label>Teléfono <input type="tel" name="telefono" autocomplete="tel" required placeholder="653 000 000" pattern="[0-9+\s]{9,16}" inputmode="tel"></label>
           <fieldset>
             <legend>¿En qué estás interesado?</legend>
             <div class="intent" role="radiogroup" aria-label="Intención">
@@ -549,12 +640,12 @@
           </fieldset>
           <details class="form-more" open>
             <summary>Email y mensaje (opcional)</summary>
-            <label>Email <input type="email" name="email" autocomplete="email" placeholder="Correo electrónico"></label>
+            <label>Email <input type="email" name="email" autocomplete="email" placeholder="Correo electrónico…"></label>
             <label>Mensaje <textarea name="mensaje" placeholder="Zona, metros, plazo…"></textarea></label>
           </details>
           <label class="consent">
             <input type="checkbox" name="privacidad" required>
-            <span>He leído y acepto la <button type="button" class="linkish" data-open="privacidad">política de privacidad</button>.</span>
+            <span>He leído y acepto la <button type="button" class="linkish" data-open="privacidad">política de privacidad</button>. Al enviar se abre WhatsApp (Meta); esa comunicación puede implicar transferencia internacional de datos.</span>
           </label>
           <button class="btn btn-solid" type="submit">Solicitar información</button>
           <p class="form-note">Al enviar se abre WhatsApp con tu consulta. No usamos tus datos para publicidad de terceros.</p>
@@ -572,7 +663,7 @@
             </ul>
           </div>
           <figure class="contact-shot">
-            <img src="assets/asesor-contacto.jpg" width="3549" height="1941" alt="Asesor de MR. Real Estate atendiendo una llamada en la oficina." decoding="async">
+            <img src="assets/asesor-contacto.jpg" width="1400" height="766" alt="Asesor de MR. Real Estate atendiendo una llamada en la oficina." decoding="async">
           </figure>
         </div>
       </div>
@@ -595,12 +686,16 @@
           <p>Negociamos con entidades para condiciones preferentes y te explicamos cada cláusula antes de comprometerte.</p>
         </details>
         <details>
+          <summary>¿Alquiláis habitaciones de estudiantes?</summary>
+          <p>Sí. Tenemos pisos completos y habitaciones en pisos compartidos. En cada ficha se indica si es habitación o piso, los metros de la pieza, si los gastos van incluidos y cómo pedir visita.</p>
+        </details>
+        <details>
           <summary>¿Dónde está la oficina?</summary>
           <p>Av. Campoamor, 18, 37003 Salamanca, junto a La Alamedilla y el Paseo del Comercio. Atención con cita previa.</p>
         </details>
         <details>
           <summary>¿En qué zonas operáis?</summary>
-          <p>Salamanca capital y alrededores: Alamedilla, Delicias, Prosperidad, El Rollo, Puente Ladrillo, Garrido, centro e Universidad.</p>
+          <p>Salamanca capital y alrededores: Alamedilla, Delicias, Prosperidad, El Rollo, Puente Ladrillo, Garrido, centro y Universidad.</p>
         </details>
       </div>
     </section>
@@ -618,8 +713,8 @@
       <a href="https://www.instagram.com/mr.realestate__" target="_blank" rel="noreferrer">Instagram</a>
     </div>
     <div>
-      <button class="btn btn-ghost" type="button" data-open="aviso">Aviso legal</button>
-      <button class="btn btn-ghost" type="button" data-open="privacidad">Privacidad</button>
+      <a href="aviso.html">Aviso legal</a><br>
+      <a href="privacidad.html">Privacidad</a>
       <p class="copyright">© <span id="year"></span> MR. Real Estate. Salamanca.</p>
     </div>
   </footer>
@@ -663,6 +758,12 @@
         "url": "https://gm-neila.github.io/mr-real-estate/",
         "image": "https://gm-neila.github.io/mr-real-estate/assets/fachada.jpg",
         "telephone": "+34653108039",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 40.9669,
+          "longitude": -5.6564
+        },
+        "hasMap": "https://maps.google.com/?q=Av.+Campoamor+18,+37003+Salamanca",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Avenida Campoamor, 18",
@@ -706,6 +807,14 @@
           },
           {
             "@type": "Question",
+            "name": "¿Alquiláis habitaciones de estudiantes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Tenemos pisos completos y habitaciones en pisos compartidos. En cada ficha se indica si es habitación o piso, los metros de la pieza, si los gastos van incluidos y cómo pedir visita."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "¿Dónde está la oficina?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -717,7 +826,7 @@
             "name": "¿En qué zonas operáis?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Salamanca capital y alrededores: Alamedilla, Delicias, Prosperidad, El Rollo, Puente Ladrillo, Garrido, centro e Universidad."
+              "text": "Salamanca capital y alrededores: Alamedilla, Delicias, Prosperidad, El Rollo, Puente Ladrillo, Garrido, centro y Universidad."
             }
           }
         ]
@@ -726,7 +835,6 @@
   }
   </script>
 
-  <script src="js/listings-data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

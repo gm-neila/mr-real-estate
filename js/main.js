@@ -1,15 +1,7 @@
 const WHATSAPP = "34653108039";
 
-function dismissLoader() {
-  document.documentElement.classList.remove("is-loading");
-  document.body.classList.remove("is-loading");
-}
-window.addEventListener("load", () => {
-  window.setTimeout(dismissLoader, 700);
-});
-window.setTimeout(dismissLoader, 2400);
-
-document.getElementById("year").textContent = new Date().getFullYear();
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 const toggle = document.querySelector(".menu-toggle");
 toggle?.addEventListener("click", () => {
@@ -23,6 +15,13 @@ document.querySelectorAll(".nav a").forEach((link) => {
     toggle?.setAttribute("aria-expanded", "false");
     toggle?.setAttribute("aria-label", "Abrir menú");
   });
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" || !document.body.classList.contains("nav-open")) return;
+  document.body.classList.remove("nav-open");
+  toggle?.setAttribute("aria-expanded", "false");
+  toggle?.setAttribute("aria-label", "Abrir menú");
+  toggle?.focus();
 });
 
 const revealNodes = document.querySelectorAll(".reveal");
@@ -84,6 +83,11 @@ form?.addEventListener("submit", (event) => {
     return;
   }
 
+  if (!/^[0-9+\s]{9,16}$/.test(telefono) || telefono.replace(/\D/g, "").length < 9) {
+    statusEl.textContent = "Indica un teléfono español válido.";
+    return;
+  }
+
   const text = [
     "Hola, os escribo desde la web de MR. Real Estate.",
     `Nombre: ${nombre}`,
@@ -93,38 +97,31 @@ form?.addEventListener("submit", (event) => {
     mensaje ? `Mensaje: ${mensaje}` : "",
   ].filter(Boolean).join("\n");
 
-  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
-  statusEl.textContent = "Abriendo WhatsApp…";
+  const waUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+  const submitBtn = form.querySelector("[type=submit]");
+  if (submitBtn) submitBtn.disabled = true;
+  const popup = window.open(waUrl, "_blank", "noopener");
+  if (!popup) {
+    statusEl.innerHTML = `Si no se abre WhatsApp, <a href="${waUrl}">pulsa aquí</a> o llama al 653 108 039.`;
+  } else {
+    statusEl.textContent = "Abriendo WhatsApp…";
+  }
+  if (submitBtn) submitBtn.disabled = false;
 });
 
 const video = document.querySelector(".band-video");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (video && !reduceMotion) {
+if (video) {
   const src = video.dataset.src;
-  const loadAndPlay = () => {
-    if (!video.querySelector("source") && src) {
-      const source = document.createElement("source");
-      source.src = src;
-      source.type = "video/mp4";
-      video.appendChild(source);
-      video.load();
-    }
-    video.play().catch(() => {});
-  };
-  if ("IntersectionObserver" in window) {
-    const videoIo = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          loadAndPlay();
-          videoIo.disconnect();
-        }
-      });
-    }, { rootMargin: "180px" });
-    videoIo.observe(video);
-  } else {
-    loadAndPlay();
-  }
+  video.addEventListener("pointerdown", () => {
+    if (video.dataset.ready || !src) return;
+    const source = document.createElement("source");
+    source.src = src;
+    source.type = "video/mp4";
+    video.appendChild(source);
+    video.dataset.ready = "1";
+    video.load();
+  }, { once: true });
 }
 
 let listingsPayload = { listings: [] };
@@ -148,22 +145,21 @@ function cardWidth() {
 
 function listingHref(item) {
   if (item.href) return item.href;
-  if (item.id) return `inmueble.html?id=${encodeURIComponent(item.id)}`;
-  return item.url || "#inmuebles";
+  if (item.id) return `inmuebles/${encodeURIComponent(item.id)}/`;
+  return "#inmuebles";
 }
 
 function listingCard(item, eager) {
   const href = listingHref(item);
-  const external = /^https?:/i.test(href) && !/gm-neila\.github\.io\/mr-real-estate/i.test(href);
-  const extra = external ? ` target="_blank" rel="noreferrer"` : "";
-  const meta = [item.area, item.rooms, item.baths].filter(Boolean)
+  const meta = (item.meta || [item.area, item.rooms, item.baths]).filter(Boolean)
     .map((bit) => `<li>${escapeHtml(bit)}</li>`).join("");
   const reserved = item.reserved ? `<span class="sold">Reservado</span>` : `<span>Disponible</span>`;
   const loading = eager ? `fetchpriority="high"` : `loading="lazy"`;
-  return `<a class="prop-card" href="${escapeHtml(href)}"${extra}>
+  const kind = item.kind ? `<span>${escapeHtml(item.kind)}</span>` : "";
+  return `<a class="prop-card" href="${escapeHtml(href)}">
       <div class="prop-photo">
-        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" ${loading} decoding="async">
-        <div class="prop-badges">${reserved}<span>${escapeHtml(item.operation)}</span></div>
+        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" width="640" height="400" ${loading} decoding="async">
+        <div class="prop-badges">${reserved}${kind}<span>${escapeHtml(item.operation)}</span></div>
       </div>
       <div class="prop-body">
         <p class="prop-price" data-price="${escapeHtml(item.price)}">0 €</p>
@@ -173,23 +169,40 @@ function listingCard(item, eager) {
     </a>`;
 }
 
+function matchesFilter(item, filter) {
+  if (!filter || filter === "all") return true;
+  if (filter === "Habitación") return item.kind === "Habitación";
+  return item.operation === filter;
+}
+
+function featuredOf(list) {
+  const sale = list.filter((item) => item.operation === "Venta").slice(0, 4);
+  const rent = list.filter((item) => item.operation === "Alquiler").slice(0, 4);
+  return [...rent, ...sale];
+}
+
+function activeFilter() {
+  return new URLSearchParams(location.search).get("tipo") || "all";
+}
+
 function renderListings(filter) {
-  if (!propTrack) return;
   const all = listingsPayload.listings || [];
-  const shown = filter === "all" ? all : all.filter((item) => item.operation === filter);
-  if (!shown.length) {
-    if (!all.length && propTrack.children.length) {
-      if (listingsEmpty) listingsEmpty.hidden = true;
-      return;
-    }
-    if (listingsEmpty) listingsEmpty.hidden = false;
-    propTrack.innerHTML = "";
-    return;
+  const shown = all.filter((item) => matchesFilter(item, filter));
+  const highlight = filter === "all" ? featuredOf(all) : shown.slice(0, 8);
+  const grid = document.getElementById("prop-grid");
+  if (listingsEmpty) listingsEmpty.hidden = shown.length > 0;
+  if (propTrack) {
+    propTrack.innerHTML = highlight.map((item, i) => listingCard(item, i === 0)).join("");
+    if (propViewport) propViewport.scrollTo({ left: 0, behavior: "auto" });
+    animatePrices(propTrack.querySelectorAll("[data-price]"));
   }
-  if (listingsEmpty) listingsEmpty.hidden = true;
-  propTrack.innerHTML = shown.map((item, i) => listingCard(item, i < 2)).join("");
-  if (propViewport) propViewport.scrollTo({ left: 0, behavior: "auto" });
-  animatePrices(propTrack.querySelectorAll("[data-price]"));
+  if (grid) {
+    grid.innerHTML = shown.map((item) => listingCard(item, false)).join("");
+    animatePrices(grid.querySelectorAll("[data-price]"));
+  }
+  document.querySelectorAll(".listing-filters button").forEach((btn) => {
+    btn.classList.toggle("is-on", btn.dataset.filter === filter);
+  });
 }
 
 function payloadHasListings(data) {
@@ -198,7 +211,7 @@ function payloadHasListings(data) {
 
 function bootListings(data) {
   listingsPayload = payloadHasListings(data) ? data : { listings: [] };
-  renderListings("all");
+  renderListings(activeFilter());
 }
 
 if (payloadHasListings(window.MR_LISTINGS)) {
@@ -255,13 +268,12 @@ function animatePrices(nodes) {
 
 document.querySelectorAll(".listing-filters button").forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".listing-filters button").forEach((other) => {
-      other.classList.remove("is-on");
-      other.setAttribute("aria-selected", "false");
-    });
-    btn.classList.add("is-on");
-    btn.setAttribute("aria-selected", "true");
-    renderListings(btn.dataset.filter);
+    const filter = btn.dataset.filter || "all";
+    const url = new URL(location.href);
+    if (filter === "all") url.searchParams.delete("tipo");
+    else url.searchParams.set("tipo", filter);
+    history.replaceState({}, "", url);
+    renderListings(filter);
   });
 });
 

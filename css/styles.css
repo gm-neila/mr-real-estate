@@ -8,7 +8,10 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
 body {
   margin: 0;
   font-family: Outfit, sans-serif;
@@ -100,18 +103,29 @@ html.js:not(.is-loading) .loader img {
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: .03em;
-  transition: .3s ease;
+  transition: background-color .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
   cursor: pointer;
 }
 .btn-solid { background: var(--white); color: var(--ink); }
-.btn-solid:hover { background: var(--gold); border-color: var(--gold); color: var(--white); }
+.btn-solid:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 .btn-ghost { background: transparent; color: var(--white); }
-.btn-ghost:hover { background: var(--gold); border-color: var(--gold); }
+.btn-ghost:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.btn:focus-visible,
+.listing-filters button:focus-visible,
+.prop-nav:focus-visible,
+.nav a:focus-visible,
+.menu-toggle:focus-visible,
+.ficha-thumb:focus-visible,
+.linkish:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
 
 .pill {
   display: inline-block;
   background: var(--gold);
-  color: var(--white);
+  color: var(--ink);
   padding: 5px 10px;
   font-family: "Libre Bodoni", serif;
   font-weight: 700;
@@ -172,6 +186,9 @@ html.js:not(.is-loading) .loader img {
 @keyframes rise { to { opacity: 1; transform: none; } }
 @keyframes ken { from { transform: scale(1.05); } to { transform: scale(1); } }
 
+.hero, .about, .method, .quotes, .faq, .listings, .services-band, .contact-band, #contenido, #ficha {
+  scroll-margin-top: 5.5rem;
+}
 .about, .method, .quotes, .faq, .listings {
   padding: 5rem 6vw;
 }
@@ -298,6 +315,25 @@ html.js:not(.is-loading) .loader img {
 }
 .listings-empty { margin: 0 0 1rem; }
 .listings-empty[hidden] { display: none; }
+.listings-kicker {
+  margin: 2rem 0 .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .82rem;
+  color: var(--gold);
+}
+.prop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.prop-grid .prop-card { flex: none; width: auto; }
+.quotes-note { opacity: .75; font-size: .92rem; max-width: 40rem; }
+.legal-page {
+  max-width: 42rem;
+  padding: 2.5rem 6vw 5rem;
+}
+.legal-page a { color: var(--gold); text-decoration: underline; }
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -593,6 +629,7 @@ blockquote footer small { display: block; color: var(--gold); font-size: .85rem;
   padding: 2rem; max-width: 32rem;
   max-height: min(80vh, 640px);
   overflow: auto;
+  overscroll-behavior: contain;
 }
 .dialog-inner p { margin: 0 0 1rem; }
 
@@ -680,6 +717,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .anim, .hero-ken { animation: none; opacity: 1; transform: none; }
   html.js .reveal { opacity: 1; transform: none; transition: none; }
 }
@@ -726,6 +764,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   cursor: pointer;
   aspect-ratio: 1;
   overflow: hidden;
+  display: block;
 }
 .ficha-thumb.is-on,
 .ficha-thumb:hover { border-color: var(--gold); }

@@ -2,6 +2,7 @@
   "name": "mr-real-estate",
   "private": true,
   "scripts": {
-    "sync": "node scripts/sync-listings.mjs"
+    "sync": "node scripts/sync-listings.mjs",
+    "build:listings": "node scripts/build-listings.mjs"
   }
 }

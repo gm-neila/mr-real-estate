@@ -285,13 +285,10 @@ async function syncMilanuncios() {
     listings,
   };
   fs.mkdirSync(path.join(ROOT, "data"), { recursive: true });
-  fs.writeFileSync(path.join(ROOT, "data", "listings.json"), JSON.stringify(payload, null, 2));
-  fs.writeFileSync(
-    path.join(ROOT, "js", "listings-data.js"),
-    `window.MR_LISTINGS = ${JSON.stringify(payload)};\n`
-  );
   pruneOldThumbs(new Set(listings.map((item) => item.id)));
-  patchIndex(listings);
+  fs.writeFileSync(path.join(ROOT, "data", "listings.json"), JSON.stringify(payload, null, 2));
+  const { rebuildFromPayload } = await import("./build-listings.mjs");
+  rebuildFromPayload(payload);
   console.log(`OK ${listings.length} inmuebles → data/listings.json`);
 }
 
