@@ -11,6 +11,15 @@ const DELAY_MS = 550;
 
 const config = JSON.parse(fs.readFileSync(path.join(__dirname, "portals.json"), "utf8"));
 
+function cleanShopUrl(raw) {
+  try {
+    const parsed = new URL(String(raw || "").trim());
+    return `${parsed.origin}${parsed.pathname}`.replace(/\/$/, "");
+  } catch {
+    return String(raw || "").split("?")[0].replace(/\/$/, "");
+  }
+}
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -245,7 +254,8 @@ async function syncMilanuncios() {
     console.warn("Idealista Pro aún no está conectado. Se usa la tienda de Milanuncios (Fotocasa Pro).");
   }
 
-  const shopHtml = await fetchHtml(config.milanunciosShop);
+  const shopUrl = cleanShopUrl(config.milanunciosShop);
+  const shopHtml = await fetchHtml(shopUrl);
   const shop = parseProps(shopHtml);
   if (!shop || !Array.isArray(shop.ads)) {
     throw new Error("Milanuncios devolvió captcha o HTML sin anuncios. Ábrelo en el navegador y vuelve a ejecutar el script.");
@@ -270,7 +280,7 @@ async function syncMilanuncios() {
   }
 
   const payload = {
-    source: config.milanunciosShop,
+    source: shopUrl,
     updated: new Date().toISOString().slice(0, 10),
     listings,
   };
