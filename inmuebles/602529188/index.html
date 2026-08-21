@@ -34,7 +34,7 @@
           <img src="assets/listings/602529188/01.jpg" width="960" height="600" alt="Garaje en calle Méjico, 13 m²">
           
         </div>
-        <div class="ficha-thumbs"><a class="ficha-thumb" href="../../assets/listings/602529188/02.jpg"><img src="../../assets/listings/602529188/02.jpg" alt="" width="160" height="160" loading="lazy"></a></div>
+        <div class="ficha-thumbs"><button type="button" class="ficha-thumb is-on" data-src="assets/listings/602529188/01.jpg" aria-label="Foto 1"><img src="assets/listings/602529188/01.jpg" alt="" width="160" height="160"></button><button type="button" class="ficha-thumb" data-src="assets/listings/602529188/02.jpg" aria-label="Foto 2"><img src="assets/listings/602529188/02.jpg" alt="" width="160" height="160" loading="lazy"></button></div>
       </div>
       <aside class="ficha-side">
         <p class="pill">Garaje · Venta</p>
@@ -58,5 +58,18 @@
     <div><h2>MR. Real Estate</h2><p>Av. Campoamor, 18, 37003 Salamanca</p></div>
     <div><a href="aviso.html">Aviso legal</a><br><a href="privacidad.html">Privacidad</a></div>
   </footer>
+  <script>
+    (function () {
+      var stage = document.querySelector(".ficha-stage img");
+      var thumbs = document.querySelectorAll(".ficha-thumb");
+      thumbs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (!stage || !btn.dataset.src) return;
+          stage.src = btn.dataset.src;
+          thumbs.forEach(function (other) { other.classList.toggle("is-on", other === btn); });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

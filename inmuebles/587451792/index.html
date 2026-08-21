@@ -34,7 +34,7 @@
           <img src="assets/listings/587451792/01.jpg" width="960" height="600" alt="Piso de 115 m² y 4 dormitorios en Salamanca">
           
         </div>
-        <div class="ficha-thumbs"><a class="ficha-thumb" href="../../assets/listings/587451792/02.jpg"><img src="../../assets/listings/587451792/02.jpg" alt="" width="160" height="160" loading="lazy"></a><a class="ficha-thumb" href="../../assets/listings/587451792/03.jpg"><img src="../../assets/listings/587451792/03.jpg" alt="" width="160" height="160" loading="lazy"></a><a class="ficha-thumb" href="../../assets/listings/587451792/04.jpg"><img src="../../assets/listings/587451792/04.jpg" alt="" width="160" height="160" loading="lazy"></a><a class="ficha-thumb" href="../../assets/listings/587451792/05.jpg"><img src="../../assets/listings/587451792/05.jpg" alt="" width="160" height="160" loading="lazy"></a><a class="ficha-thumb" href="../../assets/listings/587451792/06.jpg"><img src="../../assets/listings/587451792/06.jpg" alt="" width="160" height="160" loading="lazy"></a><a class="ficha-thumb" href="../../assets/listings/587451792/07.jpg"><img src="../../assets/listings/587451792/07.jpg" alt="" width="160" height="160" loading="lazy"></a><a class="ficha-thumb" href="../../assets/listings/587451792/08.jpg"><img src="../../assets/listings/587451792/08.jpg" alt="" width="160" height="160" loading="lazy"></a><a class="ficha-thumb" href="../../assets/listings/587451792/09.jpg"><img src="../../assets/listings/587451792/09.jpg" alt="" width="160" height="160" loading="lazy"></a><a class="ficha-thumb" href="../../assets/listings/587451792/10.jpg"><img src="../../assets/listings/587451792/10.jpg" alt="" width="160" height="160" loading="lazy"></a></div>
+        <div class="ficha-thumbs"><button type="button" class="ficha-thumb is-on" data-src="assets/listings/587451792/01.jpg" aria-label="Foto 1"><img src="assets/listings/587451792/01.jpg" alt="" width="160" height="160"></button><button type="button" class="ficha-thumb" data-src="assets/listings/587451792/02.jpg" aria-label="Foto 2"><img src="assets/listings/587451792/02.jpg" alt="" width="160" height="160" loading="lazy"></button><button type="button" class="ficha-thumb" data-src="assets/listings/587451792/03.jpg" aria-label="Foto 3"><img src="assets/listings/587451792/03.jpg" alt="" width="160" height="160" loading="lazy"></button><button type="button" class="ficha-thumb" data-src="assets/listings/587451792/04.jpg" aria-label="Foto 4"><img src="assets/listings/587451792/04.jpg" alt="" width="160" height="160" loading="lazy"></button><button type="button" class="ficha-thumb" data-src="assets/listings/587451792/05.jpg" aria-label="Foto 5"><img src="assets/listings/587451792/05.jpg" alt="" width="160" height="160" loading="lazy"></button><button type="button" class="ficha-thumb" data-src="assets/listings/587451792/06.jpg" aria-label="Foto 6"><img src="assets/listings/587451792/06.jpg" alt="" width="160" height="160" loading="lazy"></button><button type="button" class="ficha-thumb" data-src="assets/listings/587451792/07.jpg" aria-label="Foto 7"><img src="assets/listings/587451792/07.jpg" alt="" width="160" height="160" loading="lazy"></button><button type="button" class="ficha-thumb" data-src="assets/listings/587451792/08.jpg" aria-label="Foto 8"><img src="assets/listings/587451792/08.jpg" alt="" width="160" height="160" loading="lazy"></button><button type="button" class="ficha-thumb" data-src="assets/listings/587451792/09.jpg" aria-label="Foto 9"><img src="assets/listings/587451792/09.jpg" alt="" width="160" height="160" loading="lazy"></button><button type="button" class="ficha-thumb" data-src="assets/listings/587451792/10.jpg" aria-label="Foto 10"><img src="assets/listings/587451792/10.jpg" alt="" width="160" height="160" loading="lazy"></button></div>
       </div>
       <aside class="ficha-side">
         <p class="pill">Piso · Venta</p>
@@ -58,5 +58,18 @@
     <div><h2>MR. Real Estate</h2><p>Av. Campoamor, 18, 37003 Salamanca</p></div>
     <div><a href="aviso.html">Aviso legal</a><br><a href="privacidad.html">Privacidad</a></div>
   </footer>
+  <script>
+    (function () {
+      var stage = document.querySelector(".ficha-stage img");
+      var thumbs = document.querySelectorAll(".ficha-thumb");
+      thumbs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (!stage || !btn.dataset.src) return;
+          stage.src = btn.dataset.src;
+          thumbs.forEach(function (other) { other.classList.toggle("is-on", other === btn); });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

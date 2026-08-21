@@ -40,8 +40,8 @@ function listingPage(item) {
   const og = `${SITE}/${photos[0] || "assets/fachada.jpg"}`;
   const url = item.url;
   const wa = `https://wa.me/34653108039?text=${encodeURIComponent(`Hola, me interesa: ${item.title} (${item.price}). Ref. ${item.id}`)}`;
-  const thumbs = photos.slice(1).map((src, i) => (
-    `<a class="ficha-thumb" href="${esc("../../" + src)}"><img src="${esc("../../" + src)}" alt="" width="160" height="160" loading="lazy"></a>`
+  const thumbs = photos.map((src, i) => (
+    `<button type="button" class="ficha-thumb${i === 0 ? " is-on" : ""}" data-src="${esc(src)}" aria-label="Foto ${i + 1}"><img src="${esc(src)}" alt="" width="160" height="160"${i ? " loading=\"lazy\"" : ""}></button>`
   )).join("");
   const specs = (item.specs || []).map((row) => `<li><span>${esc(row.label)}</span><strong>${esc(row.value)}</strong></li>`).join("");
   const extras = (item.extras || []).map((bit) => `<li>${esc(bit)}</li>`).join("");
@@ -121,6 +121,19 @@ function listingPage(item) {
     <div><h2>MR. Real Estate</h2><p>Av. Campoamor, 18, 37003 Salamanca</p></div>
     <div><a href="aviso.html">Aviso legal</a><br><a href="privacidad.html">Privacidad</a></div>
   </footer>
+  <script>
+    (function () {
+      var stage = document.querySelector(".ficha-stage img");
+      var thumbs = document.querySelectorAll(".ficha-thumb");
+      thumbs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (!stage || !btn.dataset.src) return;
+          stage.src = btn.dataset.src;
+          thumbs.forEach(function (other) { other.classList.toggle("is-on", other === btn); });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
 `;
