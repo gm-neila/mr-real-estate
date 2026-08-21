@@ -683,3 +683,104 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   .anim, .hero-ken { animation: none; opacity: 1; transform: none; }
   html.js .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+.ficha {
+  padding: 2rem 6vw 6.5rem;
+  background: #111;
+}
+.ficha-back { margin: 0 0 1.4rem; }
+.ficha-back a { color: var(--gold); }
+.ficha-grid {
+  display: grid;
+  grid-template-columns: 1.35fr .85fr;
+  gap: 2rem;
+  align-items: start;
+}
+.ficha-stage {
+  position: relative;
+  background: #0b0b0b;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid rgba(198, 161, 91, .35);
+}
+.ficha-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ficha-sold {
+  position: absolute;
+  left: .8rem;
+  top: .8rem;
+}
+.ficha-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: .45rem;
+  margin-top: .7rem;
+}
+.ficha-thumb {
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.2);
+  background: #0b0b0b;
+  cursor: pointer;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.ficha-thumb.is-on,
+.ficha-thumb:hover { border-color: var(--gold); }
+.ficha-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ficha-side h1 {
+  margin: .4rem 0 .6rem;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+}
+.ficha-price {
+  font-family: "Libre Bodoni", serif;
+  font-size: 2rem;
+  color: var(--gold);
+  margin: 0 0 1rem;
+}
+.ficha-meta,
+.ficha-extras,
+.ficha-specs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+.ficha-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.ficha-meta li,
+.ficha-extras li {
+  border: 1px solid rgba(255,255,255,.2);
+  padding: .3rem .7rem;
+  font-size: .92rem;
+}
+.ficha-specs li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .45rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.ficha-specs span { opacity: .75; }
+.ficha-actions {
+  display: grid;
+  gap: .7rem;
+  margin-top: 1.4rem;
+}
+.ficha-copy {
+  margin-top: 2.4rem;
+  max-width: 46rem;
+}
+.ficha-desc { line-height: 1.65; }
+.ficha-empty { padding: 3rem 0 5rem; }
+@media (max-width: 900px) {
+  .ficha-grid { grid-template-columns: 1fr; }
+}

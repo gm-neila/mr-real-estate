@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    document.documentElement.classList.add("js", "is-loading");
+    document.write('<base href="' + (location.hostname === "gm-neila.github.io" ? "https://gm-neila.github.io/mr-real-estate/" : "./") + '">');
+    window.setTimeout(function () { document.documentElement.classList.remove("is-loading"); }, 1800);
+  </script>
+  <noscript>
+    <base href="https://gm-neila.github.io/mr-real-estate/">
+    <style>.loader, .reveal, .anim { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+  <title>Inmueble | MR. Real Estate Salamanca</title>
+  <meta name="description" content="Ficha de inmueble de MR. Real Estate en Salamanca. Fotos, características y contacto directo.">
+  <meta name="theme-color" content="#1c1c1c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#ficha">Saltar al contenido</a>
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-panel"></div>
+    <img src="assets/logo.svg" alt="MR. Real Estate">
+  </div>
+  <div class="topbar">
+    <a class="tel-direct" href="tel:+34653108039">Llámanos · 653 108 039</a>
+    <a class="wa-direct" href="https://wa.me/34653108039">WhatsApp</a>
+    <span>Av. Campoamor, 18, Salamanca</span>
+  </div>
+  <header class="site-header frost">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.svg" alt="">
+      <span class="brand-name"><strong>MR.</strong><span>Real Estate</span></span>
+    </a>
+    <nav class="nav" id="menu-principal" aria-label="Principal">
+      <a href="index.html#nosotros">Nosotros</a>
+      <a href="index.html#servicios">Servicios</a>
+      <a href="index.html#metodo">Método</a>
+      <a href="index.html#inmuebles">Inmuebles</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-solid header-cta" href="index.html#contacto">Contáctanos</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú"><span></span></button>
+    </div>
+  </header>
+
+  <main id="ficha" class="ficha">
+    <p class="ficha-back"><a href="index.html#inmuebles">← Volver a inmuebles</a></p>
+    <div id="ficha-root" class="ficha-root"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <h2>MR. Real Estate</h2>
+      <p>Agencia inmobiliaria en Salamanca.</p>
+      <p>Av. Campoamor, 18, 37003 Salamanca</p>
+    </div>
+    <div>
+      <a class="tel-direct" href="tel:+34653108039">653 108 039</a><br>
+      <a class="wa-direct" href="https://wa.me/34653108039">WhatsApp</a>
+    </div>
+    <div>
+      <p class="copyright">© <span id="year"></span> MR. Real Estate. Salamanca.</p>
+    </div>
+  </footer>
+  <div class="mobile-cta">
+    <a class="btn btn-ghost tel-direct" href="tel:+34653108039">Llamar</a>
+    <a class="btn btn-solid" id="ficha-wa" href="https://wa.me/34653108039">WhatsApp</a>
+  </div>
+  <script src="js/listings-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/inmueble.js"></script>
+</body>
+</html>

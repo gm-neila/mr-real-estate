@@ -146,12 +146,21 @@ function cardWidth() {
   return card.getBoundingClientRect().width + gap;
 }
 
+function listingHref(item) {
+  if (item.href) return item.href;
+  if (item.id) return `inmueble.html?id=${encodeURIComponent(item.id)}`;
+  return item.url || "#inmuebles";
+}
+
 function listingCard(item, eager) {
+  const href = listingHref(item);
+  const external = /^https?:/i.test(href) && !/gm-neila\.github\.io\/mr-real-estate/i.test(href);
+  const extra = external ? ` target="_blank" rel="noreferrer"` : "";
   const meta = [item.area, item.rooms, item.baths].filter(Boolean)
     .map((bit) => `<li>${escapeHtml(bit)}</li>`).join("");
   const reserved = item.reserved ? `<span class="sold">Reservado</span>` : `<span>Disponible</span>`;
   const loading = eager ? `fetchpriority="high"` : `loading="lazy"`;
-  return `<a class="prop-card" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">
+  return `<a class="prop-card" href="${escapeHtml(href)}"${extra}>
       <div class="prop-photo">
         <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" ${loading} decoding="async">
         <div class="prop-badges">${reserved}<span>${escapeHtml(item.operation)}</span></div>

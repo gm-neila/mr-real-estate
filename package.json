@@ -1,0 +1,7 @@
+{
+  "name": "mr-real-estate",
+  "private": true,
+  "scripts": {
+    "sync": "node scripts/sync-listings.mjs"
+  }
+}
